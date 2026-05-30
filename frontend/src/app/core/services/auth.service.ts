@@ -36,17 +36,25 @@ export class AuthService {
         );
     }
 
-    logout() {
+    logout(reload = false) {
         const req = this.getToken()
             ? this.http.post(`${environment.apiUrl}/logout`, {})
             : null;
 
         this.clearAuth();
 
+        const finish = () => {
+            if (reload) {
+                window.location.href = '/login';
+            } else {
+                this.router.navigate(['/login']);
+            }
+        };
+
         if (req) {
-            req.subscribe({ complete: () => this.router.navigate(['/login']) });
+            req.subscribe({ complete: finish, error: finish });
         } else {
-            this.router.navigate(['/login']);
+            finish();
         }
     }
 

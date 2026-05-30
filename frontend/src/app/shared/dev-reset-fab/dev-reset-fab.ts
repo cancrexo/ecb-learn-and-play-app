@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../core/services/auth.service';
 import { GameService } from '../../core/services/game.service';
@@ -16,7 +15,6 @@ export class DevResetFabComponent {
     constructor(
         protected auth: AuthService,
         private game: GameService,
-        private router: Router,
     ) {}
 
     resetProgress() {
@@ -24,14 +22,13 @@ export class DevResetFabComponent {
             return;
         }
 
-        if (!confirm('Reset game progress? (dev only)')) {
+        if (!confirm('Reset game progress and log out? (dev only)')) {
             return;
         }
 
         this.game.abandonProgress().subscribe({
             next: () => {
-                this.auth.fetchMe().subscribe();
-                this.router.navigate(['/clusters']);
+                this.auth.logout(true);
             },
             error: () => alert('Could not reset progress.'),
         });
