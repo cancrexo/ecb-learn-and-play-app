@@ -1,0 +1,13 @@
+#
+# Ocultamos todo excepto o indicado
+#
+/*
+!.gitignore
+!backend/
+!frontend/
+!SRC/
+!README.md
+!docs/
+!docs/**
+!.nvmrc
+!.env-example
