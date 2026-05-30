@@ -1,0 +1,21 @@
+.cluster-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 16px 0;
+}
+
+.cluster-card {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &--locked {
+        opacity: 0.5;
+    }
+
+    &--completed {
+        border-color: var(--color-success);
+    }
+}

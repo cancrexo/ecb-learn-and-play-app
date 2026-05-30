@@ -5,9 +5,9 @@
 !.gitignore
 !backend/
 !frontend/
-!SRC/
 !README.md
 !docs/
 !docs/**
 !.nvmrc
 !.env-example
+.env

@@ -1,0 +1,26 @@
+<div class="screen auth">
+    <h1 class="auth__title">Register</h1>
+    <form (ngSubmit)="submit()" class="auth__form">
+        <label>
+            Username
+            <input type="text" [(ngModel)]="username" name="username" required />
+        </label>
+        <label>
+            Email
+            <input type="email" [(ngModel)]="email" name="email" required />
+        </label>
+        <label>
+            Password
+            <input type="password" [(ngModel)]="password" name="password" required minlength="6" />
+        </label>
+        <label class="auth__checkbox">
+            <input type="checkbox" [(ngModel)]="acceptTerms" name="acceptTerms" required />
+            I accept the <a href="#" target="_blank">Terms &amp; Conditions</a>
+        </label>
+        @if (error()) {
+            <p class="auth__error">{{ error() }}</p>
+        }
+        <button type="submit" class="btn btn--primary" [disabled]="!acceptTerms">REGISTER</button>
+    </form>
+    <p class="auth__link">Already have an account? <a routerLink="/login">Login</a></p>
+</div>

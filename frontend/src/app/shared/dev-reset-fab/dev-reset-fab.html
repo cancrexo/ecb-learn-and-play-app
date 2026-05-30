@@ -1,0 +1,5 @@
+@if (isDev && auth.isLoggedIn()) {
+    <button type="button" class="dev-reset-fab" (click)="resetProgress()" title="Reset game progress (dev only)">
+        DEV Reset
+    </button>
+}

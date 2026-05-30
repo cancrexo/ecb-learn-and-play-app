@@ -1,0 +1,18 @@
+<div class="screen auth">
+    <h1 class="auth__title">Login</h1>
+    <form (ngSubmit)="submit()" class="auth__form">
+        <label>
+            Username or email
+            <input type="text" [(ngModel)]="login" name="login" required />
+        </label>
+        <label>
+            Password
+            <input type="password" [(ngModel)]="password" name="password" required />
+        </label>
+        @if (error()) {
+            <p class="auth__error">{{ error() }}</p>
+        }
+        <button type="submit" class="btn btn--primary">LOGIN</button>
+    </form>
+    <p class="auth__link">Don't have an account? <a routerLink="/register">Register</a></p>
+</div>

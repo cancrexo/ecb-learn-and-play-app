@@ -1,0 +1,24 @@
+<div class="screen">
+    <h1>Select a cluster</h1>
+    @if (error()) {
+        <p class="error">{{ error() }}</p>
+    }
+    <div class="cluster-list">
+        @for (cluster of clusters(); track cluster.id) {
+            <button
+                type="button"
+                class="cluster-card"
+                [class.cluster-card--locked]="cluster.status === 'locked'"
+                [class.cluster-card--completed]="cluster.status === 'completed'"
+                [disabled]="cluster.status === 'locked' || cluster.status === 'completed'"
+                (click)="selectCluster(cluster)">
+                <strong>{{ cluster.name }}</strong>
+                <span>{{ cluster.description }}</span>
+                @if (cluster.score !== null) {
+                    <small>{{ cluster.score }} pts</small>
+                }
+            </button>
+        }
+    </div>
+    <a routerLink="/instructions" class="btn btn--secondary">Back to instructions</a>
+</div>

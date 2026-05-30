@@ -1,0 +1,46 @@
+<div class="quiz-screen">
+    <app-game-header [score]="score()" />
+
+    @if (cluster(); as c) {
+        <div class="quiz-screen__cluster">
+            <p class="quiz-screen__cluster-name">{{ c.name }}</p>
+            <p class="quiz-screen__cluster-desc">{{ c.description }}</p>
+        </div>
+    }
+
+    <div class="quiz-screen__body">
+        <aside class="quiz-screen__timeline">
+            <app-path-timeline [items]="timeline()" />
+        </aside>
+
+        <main class="quiz-screen__main">
+            @if (error()) {
+                <p class="error">{{ error() }}</p>
+            }
+
+            @if (question(); as q) {
+                <p class="quiz-screen__points">{{ q.points }} points</p>
+                <h2 class="quiz-screen__question">{{ q.question }}</h2>
+
+                @if (!feedback()) {
+                    <div class="quiz-screen__answers">
+                        @for (answer of q.answers; track answer.index) {
+                            <button type="button" class="answer-btn" (click)="selectAnswer(answer.index)">
+                                {{ answer.text }}
+                            </button>
+                        }
+                    </div>
+                } @else {
+                    <div class="quiz-screen__feedback" [class.quiz-screen__feedback--ok]="feedback()!.is_correct" [class.quiz-screen__feedback--ko]="!feedback()!.is_correct">
+                        <strong>{{ feedback()!.is_correct ? 'Correct!' : 'Incorrect' }}</strong>
+                        <p>{{ feedback()!.explanation }}</p>
+                        <p>+{{ feedback()!.points_earned }} points</p>
+                    </div>
+                    <button type="button" class="btn btn--primary" (click)="nextStep()">
+                        {{ isLast() ? 'CONTINUE' : 'NEXT QUESTION' }}
+                    </button>
+                }
+            }
+        </main>
+    </div>
+</div>

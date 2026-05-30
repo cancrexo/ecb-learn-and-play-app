@@ -1,0 +1,21 @@
+<div class="screen game-over">
+    <h1>Game Over!</h1>
+    <p>Congratulations on completing all clusters!</p>
+    <p class="game-over__score">{{ totalScore() }} TOTAL POINTS</p>
+
+    @if (ranking(); as r) {
+        <p class="game-over__rank">Your ranking: #{{ r.position }}</p>
+        <div class="game-over__top">
+            <h2>Top players</h2>
+            @for (player of r.top; track player.position) {
+                <div class="game-over__row">
+                    <span>#{{ player.position }}</span>
+                    <span>{{ player.username }}</span>
+                    <span>{{ player.total_score }} pts</span>
+                </div>
+            }
+        </div>
+    }
+
+    <button type="button" class="btn btn--primary" (click)="playAgain()">PLAY AGAIN</button>
+</div>

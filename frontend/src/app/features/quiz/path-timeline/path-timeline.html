@@ -1,0 +1,5 @@
+<div class="timeline">
+    @for (item of items; track item.question_id) {
+        <span class="timeline__dot timeline__dot--{{ item.status }}"></span>
+    }
+</div>
