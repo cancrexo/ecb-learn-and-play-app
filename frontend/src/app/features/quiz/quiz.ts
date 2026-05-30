@@ -20,6 +20,9 @@ import { PathTimelineComponent } from './path-timeline/path-timeline';
     styleUrl: './quiz.scss',
 })
 export class QuizComponent implements OnInit {
+    /** Letras visuales para las opciones barajadas */
+    readonly answerLetters = ['A', 'B', 'C', 'D'];
+
     question = signal<QuestionData | null>(null);
     cluster = signal<ClusterInfo | null>(null);
     timeline = signal<TimelineItem[]>([]);

@@ -1,7 +1,7 @@
 .dev-reset-fab {
     position: fixed;
-    right: 16px;
-    bottom: 16px;
+    right: calc(16px + env(safe-area-inset-right, 0px));
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     z-index: 9999;
     padding: 10px 14px;
     border: none;

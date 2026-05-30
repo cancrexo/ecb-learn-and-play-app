@@ -377,9 +377,11 @@ frontend/
 - Reinicio post-completado (borrado historial).
 
 ### Fase 5 — Pulido mobile
-- CSS según mockups PDF.
-- Loading, errores de red, estados vacíos.
+- CSS según mockups PDF (`SRC/capturas-pdf/`).
+- Fondos de alta calidad en `frontend/public/img/backgrounds/` (origen: `SRC/assets-mockup/`).
+- Viewport mobile: `100dvh`, `viewport-fit=cover`, `safe-area-inset-*`.
 - Hooks `@media (min-width: 768px)` para tablet (sin layout tablet aún).
+- Pendiente: loading, errores de red, estados vacíos; PAUSE funcional.
 
 ---
 
@@ -400,10 +402,9 @@ frontend/
 
 ## Pendiente de confirmar en implementación
 
-1. **Assets visuales** del PDF (logo, colores).
-2. **URL Terms & Conditions** para checkbox de registro.
-3. **Prefijo `DB_PREFIX_PAT`:** usar o ignorar en este proyecto.
-4. **`.env` raíz vs `backend/.env`:** sincronizar; commitear solo `.env-example`.
+1. **URL Terms & Conditions** para checkbox de registro.
+2. **Prefijo `DB_PREFIX_PAT`:** usar o ignorar en este proyecto.
+3. **`.env` raíz vs `backend/.env`:** sincronizar; commitear solo `.env-example`.
 
 ---
 
@@ -417,4 +418,4 @@ frontend/
 - [x] Implementar endpoints de juego: start, current, answer, pause, restart, ranking
 - [x] Pantallas instrucciones, clusters, quiz con timeline, resumen cluster y fin de juego
 - [x] Guards y lógica básica: pausa/reanudación, borrado historial al recomenzar
-- [ ] Ajustes visuales según mockups PDF y preparación media queries tablet
+- [x] Ajustes visuales según mockups PDF y preparación media queries tablet

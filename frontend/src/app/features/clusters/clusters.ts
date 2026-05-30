@@ -1,5 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { ClusterItem } from '../../core/models/game.models';
 import { AuthService } from '../../core/services/auth.service';
 import { GameService } from '../../core/services/game.service';
@@ -7,7 +7,7 @@ import { GameService } from '../../core/services/game.service';
 @Component({
     selector: 'app-clusters',
     standalone: true,
-    imports: [RouterLink],
+    imports: [],
     templateUrl: './clusters.html',
     styleUrl: './clusters.scss',
 })

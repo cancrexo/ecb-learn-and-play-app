@@ -1,24 +1,25 @@
-<div class="screen">
-    <h1>Select a cluster</h1>
+<div class="screen screen--bg-full clusters">
+    <h1 class="clusters__title">Select a cluster</h1>
     @if (error()) {
         <p class="error">{{ error() }}</p>
     }
-    <div class="cluster-list">
+    <div class="clusters__list">
         @for (cluster of clusters(); track cluster.id) {
-            <button
-                type="button"
-                class="cluster-card"
-                [class.cluster-card--locked]="cluster.status === 'locked'"
-                [class.cluster-card--completed]="cluster.status === 'completed'"
-                [disabled]="cluster.status === 'locked' || cluster.status === 'completed'"
-                (click)="selectCluster(cluster)">
-                <strong>{{ cluster.name }}</strong>
-                <span>{{ cluster.description }}</span>
+            <div class="clusters__item">
+                <button
+                    type="button"
+                    class="cluster-btn cluster-btn--{{ cluster.sort_order }}"
+                    [class.cluster-btn--locked]="cluster.status === 'locked'"
+                    [class.cluster-btn--completed]="cluster.status === 'completed'"
+                    [disabled]="cluster.status === 'locked' || cluster.status === 'completed'"
+                    (click)="selectCluster(cluster)">
+                    Cluster {{ cluster.sort_order }}:
+                </button>
+                <p class="clusters__desc">{{ cluster.description }}</p>
                 @if (cluster.score !== null) {
-                    <small>{{ cluster.score }} pts</small>
+                    <small class="clusters__desc">{{ cluster.score }} points</small>
                 }
-            </button>
+            </div>
         }
     </div>
-    <a routerLink="/instructions" class="btn btn--secondary">Back to instructions</a>
 </div>

@@ -9,6 +9,7 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class GameHeaderComponent {
     @Input({ required: true }) score = 0;
+    @Input() variant: 'default' | 'banner' = 'default';
 
     constructor(protected auth: AuthService) {}
 }
