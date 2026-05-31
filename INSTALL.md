@@ -14,18 +14,18 @@ Guía para instalar, arrancar y resetear datos del proyecto en entorno local.
 ### Backend (Laravel)
 
 ```bash
-cd backend
+cd euro-api
 composer install
 ```
 
-Si no existe `backend/.env`:
+Si no existe `euro-api/.env`:
 
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-Configura MySQL en `backend/.env`:
+Configura MySQL en `euro-api/.env`:
 
 ```env
 APP_ENV=local
@@ -81,7 +81,7 @@ Usa **dos terminales**.
 **Terminal 1 — API (puerto 8000):**
 
 ```bash
-cd backend
+cd euro-api
 php artisan serve --port=8000
 ```
 
@@ -109,7 +109,7 @@ El frontend apunta a la API en `frontend/src/environments/environment.ts` (`http
 Borra tablas, las recrea y vuelve a cargar clusters y preguntas. **También elimina usuarios y partidas.**
 
 ```bash
-cd backend
+cd euro-api
 php artisan migrate:fresh --seed
 ```
 
@@ -139,16 +139,16 @@ Desde la pantalla Game Over con el botón **Play again**, o vía `POST /api/game
 
 ```bash
 # Crear jugadores de prueba (solo local, manual)
-cd backend && php artisan db:seed --class=UserSeeder
+cd euro-api && php artisan db:seed --class=UserSeeder
 
 # Listar rutas API
-cd backend && php artisan route:list --path=api
+cd euro-api && php artisan route:list --path=api
 
 # Compilar frontend para producción
 cd frontend && npm run build
 
 # Limpiar caché Laravel
-cd backend && php artisan config:clear && php artisan cache:clear
+cd euro-api && php artisan config:clear && php artisan cache:clear
 ```
 
 ## Notas

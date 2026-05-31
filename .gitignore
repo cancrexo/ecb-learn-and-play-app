@@ -3,10 +3,11 @@
 #
 /*
 !.gitignore
-!backend/
+!euro-api/
 !frontend/
 !README.md
 !INSTALL.md
+!DEPLOY.md
 !docs/
 !docs/**
 !.nvmrc
