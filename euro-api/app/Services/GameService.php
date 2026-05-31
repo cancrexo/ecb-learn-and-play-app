@@ -215,6 +215,8 @@ class GameService
             $session->completed_at = now();
             $session->save();
 
+            $this->updateBestScore($user, (int) $session->total_score);
+
             return [
                 'action' => 'game_completed',
                 'cluster_score' => $clusterScore,
@@ -260,7 +262,7 @@ class GameService
         return $this->startSession($user, $firstCluster->id);
     }
 
-    /** Solo desarrollo: borra sesión y respuestas sin iniciar partida nueva. */
+    /** Borra sesión y respuestas sin iniciar partida nueva. */
     public function abandonProgress(User $user): void
     {
         $this->deleteUserGameHistory($user);
@@ -282,31 +284,44 @@ class GameService
 
     private function getUserRanking(User $user): array
     {
-        $rankings = GameSession::where('status', 'completed')
-            ->orderByDesc('total_score')
-            ->orderBy('completed_at')
-            ->get(['user_id', 'total_score']);
+        $leader = User::where('best_score', '>', 0)
+            ->orderByDesc('best_score')
+            ->orderBy('best_score_at')
+            ->first();
+
+        $rankedUsers = User::where('best_score', '>', 0)
+            ->orderByDesc('best_score')
+            ->orderBy('best_score_at')
+            ->get(['id']);
 
         $userPosition = null;
-        $userScore = 0;
-
-        foreach ($rankings as $index => $row) {
-            if ((int) $row->user_id === (int) $user->id) {
+        foreach ($rankedUsers as $index => $row) {
+            if ((int) $row->id === (int) $user->id) {
                 $userPosition = $index + 1;
-                $userScore = (int) $row->total_score;
                 break;
             }
         }
 
-        $completedPlayers = $rankings->count();
-        $leaderScore = $completedPlayers > 0 ? (int) $rankings->first()->total_score : 0;
+        $lastCompleted = $user->completedGameSession();
+        $displayScore = $lastCompleted ? (int) $lastCompleted->total_score : 0;
+        $completedPlayers = $rankedUsers->count();
+        $leaderScore = $leader ? (int) $leader->best_score : 0;
 
         return [
             'position' => $userPosition,
-            'total_score' => $userScore,
+            'total_score' => $displayScore,
             'leader_score' => $leaderScore,
             'completed_players' => $completedPlayers,
         ];
+    }
+
+    private function updateBestScore(User $user, int $score): void
+    {
+        if ($score > (int) $user->best_score) {
+            $user->best_score = $score;
+            $user->best_score_at = now();
+            $user->save();
+        }
     }
 
     private function getCompletedClusterIds(?GameSession $session): array

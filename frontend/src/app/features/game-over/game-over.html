@@ -23,5 +23,6 @@
         }
 
         <button type="button" class="btn btn--primary" (click)="playAgain()">Play again</button>
+        <button type="button" class="btn btn--exit" [disabled]="exiting()" (click)="exitGame()">Exit</button>
     </div>
 </div>

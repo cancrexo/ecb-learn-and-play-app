@@ -84,7 +84,7 @@ a {
 }
 
 .game-over__panel {
-    margin-top: 10dvh;
+    margin-top: 12dvh;
 }
 
 @media (max-height: 740px) {
@@ -484,7 +484,7 @@ a {
     }
 
     &__score-block {
-        margin: 0 0 24px;
+        margin: 0 0 4px;
     }
 
     &__score-label {
@@ -497,7 +497,7 @@ a {
     }
 
     &__score {
-        font-size: 5rem;
+        font-size: 4.5rem;
         font-weight: 800;
         margin: -10px 0 0;
         color: var(--color-score);
@@ -516,8 +516,8 @@ a {
 
     &__progress {
         width: 100%;
-        margin: 0 0 16px;
-        padding: 28px 8px 0;
+        margin: 0 0 28px;
+        padding: 18px 8px 0;
     }
 
     &__progress-track {
@@ -538,11 +538,11 @@ a {
 
     &__progress-marker {
         position: absolute;
-        top: -28px;
-        transform: translateX(-50%);
+        top: -22px;
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        align-items: flex-end;
+        transform: translateX(-100%);
         pointer-events: none;
     }
 
@@ -551,7 +551,7 @@ a {
         font-weight: 800;
         letter-spacing: 1px;
         color: var(--color-score);
-        margin-bottom: 4px;
+        margin-right: 4px;
         white-space: nowrap;
     }
 
@@ -560,6 +560,7 @@ a {
         display: block;
         width: 2px;
         height: 22px;
+        flex-shrink: 0;
         background: var(--color-primary);
     }
 
@@ -576,6 +577,23 @@ a {
     .btn {
         width: 100%;
         max-width: 280px;
+    }
+
+    .btn--exit {
+        margin-top: 16px;
+        padding: 10px 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        background: transparent;
+        color: var(--color-primary);
+        border: 2px solid var(--color-primary);
+        border-radius: 12px;
+        cursor: pointer;
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     }
 }
 

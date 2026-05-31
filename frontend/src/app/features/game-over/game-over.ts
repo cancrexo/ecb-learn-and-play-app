@@ -13,6 +13,7 @@ import { GameService } from '../../core/services/game.service';
 export class GameOverComponent implements OnInit {
     totalScore = signal(0);
     ranking = signal<RankingData | null>(null);
+    exiting = signal(false);
 
     /** Porcentaje de la barra respecto al líder (100% si eres el único jugador). */
     progressPercent = computed(() => {
@@ -55,6 +56,25 @@ export class GameOverComponent implements OnInit {
             next: () => {
                 this.auth.fetchMe().subscribe();
                 this.router.navigate(['/quiz', 1]);
+            },
+        });
+    }
+
+    exitGame() {
+        if (this.exiting()) {
+            return;
+        }
+
+        if (!confirm('Exit the game? You will need to log in again to play.')) {
+            return;
+        }
+
+        this.exiting.set(true);
+        this.game.abandonProgress().subscribe({
+            next: () => this.auth.logout({ redirectTo: '/' }),
+            error: () => {
+                this.exiting.set(false);
+                alert('Could not exit the game.');
             },
         });
     }
