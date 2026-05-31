@@ -30,7 +30,16 @@ export class ClustersComponent implements OnInit {
 
     private initView() {
         const session = this.auth.gameSession();
-        if (session?.status === 'in_progress' && session.current_question_id) {
+
+        if (session?.status === 'completed') {
+            this.router.navigate(['/game-over']);
+            return;
+        }
+
+        if (
+            (session?.status === 'in_progress' || session?.status === 'paused')
+            && session.current_question_id
+        ) {
             this.router.navigate(['/quiz', session.current_cluster_id]);
             return;
         }

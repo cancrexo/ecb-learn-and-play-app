@@ -1,6 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { GameService } from '../../core/services/game.service';
 
 @Component({
     selector: 'app-summary',
@@ -13,11 +14,13 @@ export class SummaryComponent implements OnInit {
     clusterScore = signal(0);
     totalScore = signal(0);
     clusterLabel = signal('first');
+    pausing = signal(false);
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private auth: AuthService,
+        private game: GameService,
     ) {}
 
     ngOnInit() {
@@ -37,6 +40,21 @@ export class SummaryComponent implements OnInit {
     }
 
     pause() {
-        console.log('pausa');
+        if (this.pausing()) {
+            return;
+        }
+
+        if (!confirm('Pause and exit? Your progress will be saved.')) {
+            return;
+        }
+
+        this.pausing.set(true);
+        this.game.pause().subscribe({
+            next: () => this.auth.logout({ redirectTo: '/' }),
+            error: () => {
+                this.pausing.set(false);
+                alert('Could not pause the game.');
+            },
+        });
     }
 }

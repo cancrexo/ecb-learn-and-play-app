@@ -52,12 +52,16 @@ class GameService
 
         if ($activeSession) {
             // Entre clusters: reanudar en el siguiente cluster seleccionado
-            if ($activeSession->current_question_id === null && $activeSession->status === 'in_progress') {
+            if (
+                $activeSession->current_question_id === null
+                && in_array($activeSession->status, ['in_progress', 'paused'], true)
+            ) {
                 $clusterData = collect($this->getClustersWithProgress($user))->firstWhere('id', $clusterId);
                 if (! $clusterData || ! in_array($clusterData['status'], ['available', 'in_progress'], true)) {
                     throw new InvalidArgumentException('This cluster is not available.');
                 }
                 $firstQuestion = Question::where('cluster_id', $clusterId)->orderBy('id_question')->firstOrFail();
+                $activeSession->status = 'in_progress';
                 $activeSession->current_cluster_id = $clusterId;
                 $activeSession->current_question_id = $firstQuestion->id_question;
                 $activeSession->save();

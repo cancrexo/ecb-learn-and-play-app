@@ -1,22 +1,24 @@
 <div class="screen screen--bg-common summary">
-    <h1>Great job completing the<br>{{ clusterLabel() }} cluster!</h1>
-    <p class="summary__label">YOU SCORED</p>
-    <p class="summary__score">{{ clusterScore() }} POINTS</p>
-    <p class="summary__total">Total: {{ totalScore() }} points</p>
+    <div class="summary__panel">
+        <h1>Great job completing the<br>{{ clusterLabel() }} cluster!</h1>
+        <p class="summary__label">YOU SCORED</p>
+        <p class="summary__score">{{ clusterScore() }} POINTS</p>
+        <p class="summary__total">Total: {{ totalScore() }} points</p>
 
-    <p class="summary__intro">
-        You can now choose to keep going or take a break and return later. Don't worry — your
-        progress is saved, and you'll resume right where you left off.
-    </p>
+        <p class="summary__intro">
+            You can now choose to keep going or take a break and return later. Don't worry — your
+            progress is saved, and you'll resume right where you left off.
+        </p>
 
-    <div class="summary__actions">
-        <div class="summary__action">
-            <button type="button" class="btn btn--primary" (click)="continue()">Continue</button>
-            <p class="summary__hint">Continue to the next set of questions immediately.</p>
-        </div>
-        <div class="summary__action">
-            <button type="button" class="btn btn--primary" (click)="pause()">Pause</button>
-            <p class="summary__hint">Pause and return later to continue.</p>
+        <div class="summary__actions">
+            <div class="summary__action">
+                <button type="button" class="btn btn--primary" (click)="continue()">Continue</button>
+                <p class="summary__hint">Continue to the next set of questions immediately.</p>
+            </div>
+            <div class="summary__action">
+                <button type="button" class="btn btn--primary" [disabled]="pausing()" (click)="pause()">Pause</button>
+                <p class="summary__hint">Pause and return later to continue.</p>
+            </div>
         </div>
     </div>
 </div>

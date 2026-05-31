@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
@@ -15,15 +15,12 @@ export class LoginComponent {
     password = '';
     error = signal('');
 
-    constructor(
-        private auth: AuthService,
-        private router: Router,
-    ) {}
+    constructor(private auth: AuthService) {}
 
     submit() {
         this.error.set('');
         this.auth.login(this.login, this.password).subscribe({
-            next: () => this.router.navigate(['/instructions']),
+            next: () => this.auth.navigateAfterAuth(),
             error: (err) => {
                 const msg = err.error?.errors?.login?.[0]
                     || err.error?.message

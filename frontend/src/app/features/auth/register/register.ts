@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
@@ -17,10 +17,7 @@ export class RegisterComponent {
     acceptTerms = false;
     error = signal('');
 
-    constructor(
-        private auth: AuthService,
-        private router: Router,
-    ) {}
+    constructor(private auth: AuthService) {}
 
     submit() {
         this.error.set('');
@@ -30,7 +27,7 @@ export class RegisterComponent {
             password: this.password,
             accept_terms: this.acceptTerms,
         }).subscribe({
-            next: () => this.router.navigate(['/instructions']),
+            next: () => this.auth.navigateAfterAuth(),
             error: (err) => {
                 const msg = err.error?.errors
                     ? Object.values(err.error.errors).flat().join(' ')
