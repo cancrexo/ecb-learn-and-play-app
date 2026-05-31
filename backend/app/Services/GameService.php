@@ -283,33 +283,25 @@ class GameService
             ->orderBy('completed_at')
             ->get(['user_id', 'total_score']);
 
-        $position = 1;
         $userPosition = null;
         $userScore = 0;
 
         foreach ($rankings as $index => $row) {
             if ((int) $row->user_id === (int) $user->id) {
                 $userPosition = $index + 1;
-                $userScore = $row->total_score;
+                $userScore = (int) $row->total_score;
                 break;
             }
         }
 
-        $top = GameSession::where('status', 'completed')
-            ->with('user:id,username')
-            ->orderByDesc('total_score')
-            ->limit(10)
-            ->get()
-            ->map(fn ($s, $i) => [
-                'position' => $i + 1,
-                'username' => $s->user->username,
-                'total_score' => $s->total_score,
-            ]);
+        $completedPlayers = $rankings->count();
+        $leaderScore = $completedPlayers > 0 ? (int) $rankings->first()->total_score : 0;
 
         return [
             'position' => $userPosition,
             'total_score' => $userScore,
-            'top' => $top,
+            'leader_score' => $leaderScore,
+            'completed_players' => $completedPlayers,
         ];
     }
 

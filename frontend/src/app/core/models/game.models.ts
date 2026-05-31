@@ -57,5 +57,6 @@ export interface AnswerResult {
 export interface RankingData {
     position: number | null;
     total_score: number;
-    top: Array<{ position: number; username: string; total_score: number }>;
+    leader_score: number;
+    completed_players: number;
 }

@@ -6,6 +6,7 @@
 !backend/
 !frontend/
 !README.md
+!INSTALL.md
 !docs/
 !docs/**
 !.nvmrc

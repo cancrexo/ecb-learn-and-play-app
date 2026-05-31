@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, computed, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { RankingData } from '../../core/models/game.models';
 import { AuthService } from '../../core/services/auth.service';
@@ -13,6 +13,21 @@ import { GameService } from '../../core/services/game.service';
 export class GameOverComponent implements OnInit {
     totalScore = signal(0);
     ranking = signal<RankingData | null>(null);
+
+    /** Porcentaje de la barra respecto al líder (100% si eres el único jugador). */
+    progressPercent = computed(() => {
+        const r = this.ranking();
+        if (!r) {
+            return 0;
+        }
+        if (r.completed_players <= 1) {
+            return 100;
+        }
+        if (!r.leader_score) {
+            return 100;
+        }
+        return Math.min(100, Math.round((r.total_score / r.leader_score) * 100));
+    });
 
     constructor(
         private router: Router,

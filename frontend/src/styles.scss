@@ -1,6 +1,7 @@
 :root {
     --color-primary: #4a69bd;
     --color-success: #2e7d32;
+    --color-score: #76adb4;
     --color-error: #c62828;
     --color-pending: #7eb8e8;
     --color-muted: #64748b;
@@ -10,7 +11,7 @@
     --color-cluster-1: #4a69bd;
     --color-cluster-2: #a2d9ce;
     --color-cluster-3: #8e7cc3;
-    --color-cluster-4: #f4b6c2;
+    --color-cluster-4: #ef5e7a;
     --color-answer-bg: #b8d4f0;
     --max-width: 480px;
     --safe-top: env(safe-area-inset-top, 0px);
@@ -51,15 +52,20 @@ a {
     background-position: center top;
 }
 
-.screen--bg-full {
-    background-image: url('/img/backgrounds/bg-full.jpg');
+.screen--bg-splash {
+  background-image: url('/img/backgrounds/back-ground-splash.jpg');
+  background-size: 180% auto;
+  background-position: 58% -170px;
+  color: #fff;
+}
+
+.screen--bg-common {
+    background-image: url('/img/backgrounds/back-ground-common.jpg');
+    background-size: 180% auto;
+    background-position: center -120px;
     color: #fff;
 }
 
-.screen--bg-full-alt {
-    background-image: url('/img/backgrounds/bg-full-alt.jpg');
-    color: #fff;
-}
 
 .splash {
     justify-content: flex-end;
@@ -306,9 +312,14 @@ a {
     &--3 { background: var(--color-cluster-3); }
     &--4 { background: var(--color-cluster-4); }
 
-    &--locked,
-    &--completed {
+    &--locked {
         opacity: 0.45;
+        cursor: not-allowed;
+    }
+
+    &--completed {
+        border: none;
+        opacity: 0.55;
         cursor: not-allowed;
     }
 }
@@ -387,52 +398,112 @@ a {
 .game-over {
     text-align: center;
 
-    h1 {
-        font-size: 1.5rem;
+    &__title {
+        font-size: 2.25rem;
         font-weight: 800;
-        margin: 120px 0 8px;
+        color: var(--color-primary);
+        margin: 30dvh 0 4px;
+        line-height: 1.1;
     }
 
     &__subtitle {
-        font-size: 0.95rem;
-        color: var(--color-text-on-bg);
-        margin: 0 0 16px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        margin: 0 0 24px;
+    }
+
+    &__score-block {
+        margin: 0 0 24px;
+    }
+
+    &__score-label {
+        margin: 0 0 8px;
+        font-size: 1.5rem;
+        font-weight: normal;
+        letter-spacing: 0px;
+        color: #fff;
+        text-align: center;
     }
 
     &__score {
-        font-size: 2rem;
+        font-size: 5.5rem;
         font-weight: 800;
-        margin: 16px 0;
+        margin: -10px 0 0;
+        color: var(--color-score);
+        text-align: center;
+        line-height: 1;
     }
 
-    &__rank {
-        font-size: 1.1rem;
+    &__score-unit {
+        margin: 4px 0 0;
+        font-size: 1.7rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: var(--color-primary);
+        text-align: center;
+    }
+
+    &__progress {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto 16px;
+        padding: 28px 8px 0;
+    }
+
+    &__progress-track {
+        position: relative;
+        height: 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.45);
+        overflow: visible;
+    }
+
+    &__progress-fill {
+        height: 100%;
+        border-radius: 999px;
+        background: var(--color-primary);
+        min-width: 0;
+        transition: width 0.4s ease;
+    }
+
+    &__progress-marker {
+        position: absolute;
+        top: -28px;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        pointer-events: none;
+    }
+
+    &__progress-you {
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        color: var(--color-score);
+        margin-bottom: 4px;
+        white-space: nowrap;
+    }
+
+    &__progress-marker::after {
+        content: '';
+        display: block;
+        width: 2px;
+        height: 22px;
+        background: var(--color-primary);
+    }
+
+    &__hint {
+        margin: 24px 0 ;
+        padding: 0 12px;
+        font-size: 1rem;
+        line-height: 1.45;
         font-weight: 600;
-        margin-bottom: 24px;
+        width:70%;
+        margin-left:15%;
+        color: var(--color-primary);
     }
-
-    &__top {
-        text-align: left;
-        margin-bottom: 24px;
-        background: rgba(255, 255, 255, 0.85);
-        border-radius: 12px;
-        padding: 16px;
-        color: var(--color-text-on-bg);
-
-        h2 {
-            margin: 0 0 12px;
-            font-size: 1rem;
-        }
-    }
-
-    &__row {
-        display: grid;
-        grid-template-columns: 40px 1fr auto;
-        padding: 8px 0;
-        border-bottom: 1px solid var(--color-border);
-        font-size: 0.85rem;
-    }
-
     .btn {
         margin-top: auto;
         width: 100%;

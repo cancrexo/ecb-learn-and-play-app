@@ -1,20 +1,24 @@
-<div class="screen screen--bg-full game-over">
-    <h1>Game Over!</h1>
-    <p class="game-over__subtitle">Congratulations on completing all clusters!</p>
-    <p class="game-over__score">{{ totalScore() }} TOTAL POINTS</p>
+<div class="screen screen--bg-common game-over">
+    <h1 class="game-over__title">Congratulations!</h1>
+    <p class="game-over__subtitle">You completed the game</p>
+    <div class="game-over__score-block">
+        <p class="game-over__score-label">YOU SCORED</p>
+        <p class="game-over__score">{{ totalScore() }}</p>
+        <p class="game-over__score-unit">POINTS</p>
+    </div>
 
-    @if (ranking(); as r) {
-        <p class="game-over__rank">Your ranking: #{{ r.position }}</p>
-        <div class="game-over__top">
-            <h2>Top players</h2>
-            @for (player of r.top; track player.position) {
-                <div class="game-over__row">
-                    <span>#{{ player.position }}</span>
-                    <span>{{ player.username }}</span>
-                    <span>{{ player.total_score }} points</span>
+    @if (ranking()) {
+        <div class="game-over__progress">
+            <div class="game-over__progress-track">
+                <div class="game-over__progress-fill" [style.width.%]="progressPercent()"></div>
+                <div class="game-over__progress-marker" [style.left.%]="progressPercent()">
+                    <span class="game-over__progress-you">YOU</span>
                 </div>
-            }
+            </div>
         </div>
+        <p class="game-over__hint">
+            Play again to improve your score and achieve a higher ranking!
+        </p>
     }
 
     <button type="button" class="btn btn--primary" (click)="playAgain()">Play again</button>
