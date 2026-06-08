@@ -1,5 +1,14 @@
 <div class="timeline">
-    @for (item of items; track item.question_id) {
-        <span class="timeline__dot timeline__dot--{{ item.status }}"></span>
+    @for (group of groups; track $index) {
+        <div class="timeline__group">
+            <span
+                class="timeline__dot timeline__dot--cluster"
+                [class.timeline__dot--cluster-active]="isClusterActive($index)"
+                [class.timeline__dot--cluster-inactive]="!isClusterActive($index)">
+            </span>
+            @for (item of group; track item.question_id) {
+                <span class="timeline__dot timeline__dot--{{ item.status }}"></span>
+            }
+        </div>
     }
 </div>

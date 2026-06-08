@@ -362,8 +362,12 @@ class GameService
 
     private function buildTimeline(GameSession $session): array
     {
-        $questions = Question::where('cluster_id', $session->current_cluster_id)
-            ->orderBy('id_question')
+        // Camino global: todas las preguntas del juego ordenadas por cluster
+        $questions = Question::query()
+            ->join('clusters', 'questions.cluster_id', '=', 'clusters.id')
+            ->orderBy('clusters.sort_order')
+            ->orderBy('questions.id_question')
+            ->select('questions.*')
             ->get();
 
         $answers = GameAnswer::where('session_id', $session->id)

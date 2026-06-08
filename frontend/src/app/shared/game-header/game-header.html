@@ -2,13 +2,12 @@
     @if (variant === 'default') {
         <span class="game-header__logo">Euro Learn &amp; Play</span>
         <span class="game-header__user">{{ auth.user()?.username }}</span>
-        <span class="game-header__score">{{ score }} points</span>
+        <span class="game-header__score">{{ score }} <span class="game-header__score-unit">points</span></span>
     } @else {
         <div class="game-header__banner-info">
-            <p class="game-header__label">Your name</p>
             <p class="game-header__user">{{ auth.user()?.username }}</p>
             <p class="game-header__label">Score</p>
-            <p class="game-header__score">{{ score }} points</p>
+            <p class="game-header__score">{{ score }} <span class="game-header__score-unit">points</span></p>
         </div>
     }
 </header>

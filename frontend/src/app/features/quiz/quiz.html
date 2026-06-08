@@ -17,7 +17,9 @@
 
         <div class="quiz-screen__body">
             <aside class="quiz-screen__timeline">
-                <app-path-timeline [items]="timeline()" />
+                <app-path-timeline
+                    [items]="timeline()"
+                    [activeClusterId]="cluster()?.id ?? null" />
             </aside>
 
             <main class="quiz-screen__main">

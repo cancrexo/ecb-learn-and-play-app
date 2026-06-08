@@ -1,19 +1,37 @@
+:host {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+}
+
 .timeline {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    width: 100%;
     padding: 8px 4px;
 
+    &__group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+
+        &:not(:last-child) {
+            margin-bottom: 40px;
+        }
+    }
+
     &__dot {
-        width: 14px;
-        height: 14px;
+        width: calc(14px * 0.7);
+        height: calc(14px * 0.7);
         border-radius: 50%;
         background: var(--color-pending);
 
         &--current {
-            background: var(--color-primary);
-            box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.3);
+            background: var(--color-pending);
+            opacity: 0.5;
         }
 
         &--pending {
@@ -27,6 +45,20 @@
 
         &--incorrect {
             background: var(--color-error);
+        }
+
+        &--cluster {
+            width: 14px;
+            height: 14px;
+
+            &-active {
+                background: var(--color-primary);
+            }
+
+            &-inactive {
+                background: var(--color-pending);
+                opacity: 0.5;
+            }
         }
     }
 }

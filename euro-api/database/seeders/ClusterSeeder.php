@@ -11,23 +11,23 @@ class ClusterSeeder extends Seeder
     {
         $clusters = [
             [
-                'name' => 'Cluster 1 — History of the Euro',
-                'description' => 'Discover when and why the euro was created.',
+                'name' => 'Cluster 1',
+                'description' => 'What is the digital euro?',
                 'sort_order' => 1,
             ],
             [
-                'name' => 'Cluster 2 — European Central Bank',
-                'description' => 'Learn about the ECB and its main responsibilities.',
+                'name' => 'Cluster 2',
+                'description' => 'How would it work?',
                 'sort_order' => 2,
             ],
             [
-                'name' => 'Cluster 3 — Euro Banknotes & Coins',
-                'description' => 'Explore the design and security features of euro cash.',
+                'name' => 'Cluster 3',
+                'description' => 'Privacy, trust and safeguards',
                 'sort_order' => 3,
             ],
             [
-                'name' => 'Cluster 4 — Eurozone & Economy',
-                'description' => 'Understand how the eurozone works today.',
+                'name' => 'Cluster 4',
+                'description' => 'Behind the digital euro',
                 'sort_order' => 4,
             ],
         ];
