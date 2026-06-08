@@ -58,7 +58,7 @@ export class GameService {
         return this.http.post(`${environment.apiUrl}/game/restart`, {});
     }
 
-    /** Solo desarrollo: borra progreso de partida. */
+    /** Borra progreso de partida sin iniciar partida nueva. */
     abandonProgress() {
         return this.http.post<{ message: string }>(`${environment.apiUrl}/game/abandon`, {});
     }

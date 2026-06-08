@@ -15,6 +15,7 @@ export const authGuard: CanActivateFn = () => {
     return auth.fetchMe().pipe(
         map(() => true),
         catchError(() => {
+            auth.clearInvalidSession();
             router.navigate(['/login']);
             return of(false);
         }),
@@ -23,12 +24,25 @@ export const authGuard: CanActivateFn = () => {
 
 export const guestGuard: CanActivateFn = () => {
     const auth = inject(AuthService);
-    const router = inject(Router);
+
+    if (!auth.getToken()) {
+        return true;
+    }
 
     if (auth.isLoggedIn()) {
-        router.navigate(['/instructions']);
+        auth.navigateAfterAuth();
         return false;
     }
 
-    return true;
+    return auth.fetchMe().pipe(
+        map(() => {
+            auth.navigateAfterAuth();
+            return false;
+        }),
+        catchError(() => {
+            // Token inválido: limpiar y mostrar login (no re-navegar a /login → bucle infinito)
+            auth.clearInvalidSession();
+            return of(true);
+        }),
+    );
 };

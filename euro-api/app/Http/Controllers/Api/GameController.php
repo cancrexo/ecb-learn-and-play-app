@@ -106,13 +106,8 @@ class GameController extends Controller
         return response()->json($this->gameService->getRanking($request->user()));
     }
 
-    /** Reset de progreso; solo disponible en entorno local/debug. */
     public function abandon(Request $request): JsonResponse
     {
-        if (! app()->environment('local') && ! config('app.debug')) {
-            abort(404);
-        }
-
         $this->gameService->abandonProgress($request->user());
 
         return response()->json(['message' => 'Game progress reset.']);

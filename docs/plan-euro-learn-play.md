@@ -2,7 +2,7 @@
 
 ## Contexto
 
-Proyecto **greenfield**: carpetas [`backend/`](../backend/) y [`frontend/`](../frontend/) vacías. Especificación en [`SRC/Prompt-dani.pdf`](../SRC/Prompt-dani.pdf) y [`prompts/prompt-inicial.md`](../prompts/prompt-inicial.md). Credenciales MySQL en [`.env`](../.env) (raíz del repo, formato custom).
+Proyecto **greenfield**: carpetas [`euro-api/`](../euro-api/) y [`frontend/`](../frontend/) vacías. Especificación en [`SRC/Prompt-dani.pdf`](../SRC/Prompt-dani.pdf) y [`prompts/prompt-inicial.md`](../prompts/prompt-inicial.md). Credenciales MySQL en [`.env`](../.env) (raíz del repo, formato custom).
 
 **Stack acordado:** Angular (SPA mobile-first) + Laravel API (PHP 8.3).
 
@@ -42,7 +42,7 @@ flowchart LR
 
 **Comunicación:** JSON REST. Autenticación con **Laravel Sanctum** (tokens para SPA). CORS configurado para el dev server de Angular.
 
-**Entorno:** Mapear variables de [`.env`](../.env) raíz a `backend/.env` de Laravel:
+**Entorno:** Mapear variables de [`.env`](../.env) raíz a `euro-api/.env` de Laravel:
 
 | Variable raíz | Laravel |
 |---------------|---------|
@@ -323,7 +323,7 @@ Valores de `status` por cluster: `locked`, `available`, `in_progress`, `complete
 ## Estructura de carpetas
 
 ```
-backend/
+euro-api/
   app/Models/{User,Cluster,Question,GameSession,GameAnswer}.php
   app/Http/Controllers/Api/{AuthController,ClusterController,GameController}.php
   app/Http/Resources/{ClusterResource,QuestionResource,...}.php
@@ -352,7 +352,7 @@ frontend/
 ## Fases de implementación
 
 ### Fase 1 — Infraestructura
-- Laravel 11+ en `backend/` (API-only, Sanctum, CORS).
+- Laravel 11+ en `euro-api/` (API-only, Sanctum, CORS).
 - Angular **21** en `frontend/` (routing, HttpClient, interceptor token).
 - **Node 24** vía [`.nvmrc`](../.nvmrc) — ejecutar `nvm use` antes de npm/npx.
 - Dev server Angular en puerto **4700**; CORS backend → `http://localhost:4700`.
@@ -404,13 +404,13 @@ frontend/
 
 1. **URL Terms & Conditions** para checkbox de registro.
 2. **Prefijo `DB_PREFIX_PAT`:** usar o ignorar en este proyecto.
-3. **`.env` raíz vs `backend/.env`:** sincronizar; commitear solo `.env-example`.
+3. **`.env` raíz vs `euro-api/.env`:** sincronizar; commitear solo `.env-example`.
 
 ---
 
 ## Tareas de implementación
 
-- [x] Inicializar Laravel API en `backend/` con Sanctum, CORS y `.env` desde credenciales raíz
+- [x] Inicializar Laravel API en `euro-api/` con Sanctum, CORS y `.env` desde credenciales raíz
 - [x] Inicializar Angular 21 en `frontend/` con routing, HttpClient e interceptor auth (Node 24, puerto 4700)
 - [x] Crear migraciones `users`, `clusters`, `questions`, `game_sessions`, `game_answers` + seeders
 - [x] Implementar endpoints register / login / logout / me

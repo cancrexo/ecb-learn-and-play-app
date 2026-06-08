@@ -1,25 +1,27 @@
 <div class="screen screen--bg-common clusters">
-    <h1 class="clusters__title">Select a cluster</h1>
-    @if (error()) {
-        <p class="error">{{ error() }}</p>
-    }
-    <div class="clusters__list">
-        @for (cluster of clusters(); track cluster.id) {
-            <div class="clusters__item">
-                <button
-                    type="button"
-                    class="cluster-btn cluster-btn--{{ cluster.sort_order }}"
-                    [class.cluster-btn--locked]="cluster.status === 'locked'"
-                    [class.cluster-btn--completed]="cluster.status === 'completed'"
-                    [disabled]="cluster.status === 'locked' || cluster.status === 'completed'"
-                    (click)="selectCluster(cluster)">
-                    Cluster {{ cluster.sort_order }}:
-                </button>
-                <p class="clusters__desc">{{ cluster.description }}</p>
-                @if (cluster.score !== null) {
-                    <small class="clusters__desc">{{ cluster.score }} points</small>
-                }
-            </div>
+    <div class="clusters__panel">
+        <h1 class="clusters__title">Select a cluster</h1>
+        @if (error()) {
+            <p class="error">{{ error() }}</p>
         }
+        <div class="clusters__list">
+            @for (cluster of clusters(); track cluster.id) {
+                <div class="clusters__item">
+                    <button
+                        type="button"
+                        class="cluster-btn cluster-btn--{{ cluster.sort_order }}"
+                        [class.cluster-btn--locked]="cluster.status === 'locked'"
+                        [class.cluster-btn--completed]="cluster.status === 'completed'"
+                        [disabled]="cluster.status === 'locked' || cluster.status === 'completed'"
+                        (click)="selectCluster(cluster)">
+                        Cluster {{ cluster.sort_order }}:
+                    </button>
+                    <p class="clusters__desc">{{ cluster.description }}</p>
+                    @if (cluster.score !== null) {
+                        <small class="clusters__desc">{{ cluster.score }} points</small>
+                    }
+                </div>
+            }
+        </div>
     </div>
 </div>

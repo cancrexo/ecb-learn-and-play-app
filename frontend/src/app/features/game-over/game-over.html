@@ -1,25 +1,28 @@
 <div class="screen screen--bg-common game-over">
-    <h1 class="game-over__title">Congratulations!</h1>
-    <p class="game-over__subtitle">You completed the game</p>
-    <div class="game-over__score-block">
-        <p class="game-over__score-label">YOU SCORED</p>
-        <p class="game-over__score">{{ totalScore() }}</p>
-        <p class="game-over__score-unit">POINTS</p>
-    </div>
+    <div class="game-over__panel">
+        <h1 class="game-over__title">Congratulations!</h1>
+        <p class="game-over__subtitle">You completed the game</p>
+        <div class="game-over__score-block">
+            <p class="game-over__score-label">YOU SCORED</p>
+            <p class="game-over__score">{{ totalScore() }}</p>
+            <p class="game-over__score-unit">POINTS</p>
+        </div>
 
-    @if (ranking()) {
-        <div class="game-over__progress">
-            <div class="game-over__progress-track">
-                <div class="game-over__progress-fill" [style.width.%]="progressPercent()"></div>
-                <div class="game-over__progress-marker" [style.left.%]="progressPercent()">
-                    <span class="game-over__progress-you">YOU</span>
+        @if (ranking()) {
+            <div class="game-over__progress">
+                <div class="game-over__progress-track">
+                    <div class="game-over__progress-fill" [style.width.%]="progressPercent()"></div>
+                    <div class="game-over__progress-marker" [style.left.%]="progressPercent()">
+                        <span class="game-over__progress-you">YOU</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <p class="game-over__hint">
-            Play again to improve your score and achieve a higher ranking!
-        </p>
-    }
+            <p class="game-over__hint">
+                Play again to improve your score and achieve a higher ranking!
+            </p>
+        }
 
-    <button type="button" class="btn btn--primary" (click)="playAgain()">Play again</button>
+        <button type="button" class="btn btn--primary" (click)="playAgain()">Play again</button>
+        <button type="button" class="btn btn--exit" [disabled]="exiting()" (click)="exitGame()">Exit</button>
+    </div>
 </div>
