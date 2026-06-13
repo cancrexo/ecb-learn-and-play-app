@@ -62,3 +62,27 @@
         }
     }
 }
+
+@media (min-width: 768px) and (orientation: portrait) {
+    .timeline {
+        padding: 10px 6px;
+
+        &__group {
+            gap: 8px;
+
+            &:not(:last-child) {
+                margin-bottom: 44px;
+            }
+        }
+
+        &__dot {
+            width: calc(14px * 0.85);
+            height: calc(14px * 0.85);
+
+            &--cluster {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+}

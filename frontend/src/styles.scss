@@ -14,6 +14,8 @@
     --color-cluster-4: #ef5e7a;
     --color-answer-bg: #b8d4f0;
     --max-width: 480px;
+    --panel-max-width: 280px;
+    --panel-container-max-width: 320px;
     --safe-top: env(safe-area-inset-top, 0px);
     --safe-bottom: env(safe-area-inset-bottom, 0px);
     --safe-left: env(safe-area-inset-left, 0px);
@@ -32,11 +34,25 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+// Fondo común a pantalla completa (todos los viewports de momento)
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: url('/img/backgrounds/back-ground-common.jpg');
+    background-repeat: no-repeat;
+    background-size: 180% auto;
+    background-position: center -120px;
+    pointer-events: none;
+}
+
 a {
     color: inherit;
 }
 
 .screen {
+    position: relative;
     min-height: 100dvh;
     max-width: var(--max-width);
     margin: 0 auto;
@@ -47,23 +63,52 @@ a {
         calc(16px + var(--safe-left));
     display: flex;
     flex-direction: column;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center top;
-}
-
-.screen--bg-splash {
-  background-image: url('/img/backgrounds/back-ground-splash.jpg');
-  background-size: 180% auto;
-  background-position: 58% -170px;
-  color: #fff;
-}
-
-.screen--bg-common {
-    background-image: url('/img/backgrounds/back-ground-common.jpg');
-    background-size: 180% auto;
-    background-position: center -120px;
     color: #fff;
+}
+
+// Placeholder del logotipo (sustituir por imagen en brand-logo)
+.brand-logo {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(280px, 72%);
+    height: 72px;
+    background: #9ca3af;
+    z-index: 1;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #fff;
+    }
+}
+
+.quiz-screen__header .brand-logo {
+    top: 50px;
+    right: 5dvw;
+    left: auto;
+    transform: none;
+    min-height: 22dvh;
+    z-index: 0;
+}
+
+.quiz-screen__header .game-header--banner {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+}
+
+.quiz-screen__header .game-header__banner-info {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .clusters__panel,
@@ -73,7 +118,7 @@ a {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 320px;
+    max-width: var(--panel-container-max-width);
     max-height: 100%;
     overflow-y: visible;
 }
@@ -103,8 +148,35 @@ a {
 
 
 .splash {
+    height: 100dvh;
     justify-content: flex-end;
     text-align: center;
+
+    .brand-logo {
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 80%;
+        opacity: 0.5;
+
+        &__label {
+            font-size: 1.25rem;
+        }
+    }
+
+    &--2 .brand-logo {
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(280px, 72%);
+        height: 72px;
+        opacity: 1;
+
+        &__label {
+            font-size: 0.7rem;
+        }
+    }
 
     &__content {
         flex: 1;
@@ -130,19 +202,23 @@ a {
 
     .btn {
         width: 100%;
-        max-width: 280px;
+        max-width: var(--panel-max-width);
         margin: 0 auto;
     }
 }
 
 .auth {
+    &__panel {
+        width: 100%;
+        margin-top: clamp(80px, 18vh, 160px);
+    }
+
     &__title {
         text-align: center;
         font-size: 1.5rem;
         font-weight: 800;
         text-transform: uppercase;
-        margin-top: 140px;
-        margin-bottom: 8px;
+        margin: 0 0 8px;
     }
 
     &__subtitle {
@@ -203,8 +279,9 @@ a {
     }
 
     &__error {
-        color: #ffcdd2;
+        color: #555;
         font-size: 0.9rem;
+        text-align: center;
     }
 
     &__info {
@@ -319,7 +396,7 @@ a {
     .btn {
         margin-top: 40px;
         width: 100%;
-        max-width: 280px;
+        max-width: var(--panel-max-width);
         align-self: center;
     }
 }
@@ -358,7 +435,7 @@ a {
         font-weight: 700;
         color: var(--color-text-on-bg);
         text-align: center;
-        max-width: 280px;
+        max-width: var(--panel-max-width);
     }
 
     .cluster-btn {
@@ -390,7 +467,7 @@ a {
 
 .cluster-btn {
     width: 100%;
-    max-width: 280px;
+    max-width: var(--panel-max-width);
     padding: 14px 20px;
     border: 2px solid #fff;
     border-radius: 24px;
@@ -472,12 +549,12 @@ a {
         flex-direction: column;
         align-items: center;
         width: 100%;
-        max-width: 320px;
+        max-width: var(--panel-container-max-width);
         gap: 12px;
 
         .btn {
             width: 100%;
-            max-width: 280px;
+            max-width: var(--panel-max-width);
         }
     }
 
@@ -487,7 +564,7 @@ a {
         line-height: 1.4;
         color: var(--color-text-on-bg);
         text-align: center;
-        max-width: 280px;
+        max-width: var(--panel-max-width);
     }
 }
 
@@ -604,7 +681,7 @@ a {
 
     .btn {
         width: 100%;
-        max-width: 280px;
+        max-width: var(--panel-max-width);
     }
 
     .btn--exit {
@@ -625,7 +702,121 @@ a {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (orientation: portrait) {
+    :root {
+        --max-width: 640px;
+        --panel-max-width: 400px;
+        --panel-container-max-width: 480px;
+    }
+
+    .screen {
+        padding:
+            calc(32px + var(--safe-top))
+            calc(24px + var(--safe-right))
+            calc(32px + var(--safe-bottom))
+            calc(24px + var(--safe-left));
+    }
+
+    .splash {
+        &__title {
+            font-size: 1.25rem;
+        }
+
+        &__text {
+            font-size: 1.05rem;
+        }
+    }
+
+    .auth {
+        &__panel {
+            margin-top: clamp(100px, 28vh, 220px);
+        }
+
+        &__title {
+            font-size: 1.65rem;
+        }
+
+        &__subtitle {
+            font-size: 0.95rem;
+        }
+
+        &__form {
+            input[type='text'],
+            input[type='email'],
+            input[type='password'],
+            select {
+                font-size: 1rem;
+                padding: 16px 18px;
+            }
+        }
+    }
+
+    .instructions {
+        &__title {
+            font-size: 1.25rem;
+        }
+
+        &__subtitle {
+            font-size: 1.05rem;
+        }
+
+        ul {
+            font-size: 1rem;
+        }
+    }
+
+    .clusters__panel,
+    .summary__panel,
+    .game-over__panel {
+        margin-top: 10dvh;
+    }
+
+    .clusters {
+        &__title {
+            font-size: 1.1rem;
+        }
+    }
+
+    .cluster-btn {
+        font-size: 1.1rem;
+        padding: 16px 24px;
+    }
+
+    .summary {
+        h1 {
+            font-size: 1.3rem;
+        }
+
+        &__score {
+            font-size: 2.75rem;
+        }
+    }
+
+    .game-over {
+        &__title {
+            font-size: 2.5rem;
+        }
+
+        &__score {
+            font-size: 5rem;
+        }
+
+        &__hint {
+            font-size: 1.05rem;
+            width: 80%;
+        }
+    }
+}
+
+// Tablet landscape y desktop: contenedor más ancho (fondo wide vía body::before ≥768px)
+@media (min-width: 768px) and (orientation: landscape),
+       (min-width: 1024px) {
+    :root {
+        --max-width: 720px;
+        --panel-max-width: 400px;
+        --panel-container-max-width: 480px;
+    }
+
     .screen {
         padding:
             calc(32px + var(--safe-top))

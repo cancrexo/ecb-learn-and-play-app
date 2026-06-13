@@ -28,7 +28,7 @@ export class DevResetFabComponent {
 
         this.game.abandonProgress().subscribe({
             next: () => {
-                this.auth.logout({ redirectTo: '/login', reload: true });
+                this.auth.logout({ redirectTo: '/', reload: true });
             },
             error: () => alert('Could not reset progress.'),
         });

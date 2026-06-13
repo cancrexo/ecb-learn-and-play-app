@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { ClusterItem } from '../../core/models/game.models';
 import { AuthService } from '../../core/services/auth.service';
 import { GameService } from '../../core/services/game.service';
+import { BrandLogoComponent } from '../../shared/brand-logo/brand-logo';
 
 @Component({
     selector: 'app-clusters',
     standalone: true,
-    imports: [],
+    imports: [BrandLogoComponent],
     templateUrl: './clusters.html',
     styleUrl: './clusters.scss',
 })

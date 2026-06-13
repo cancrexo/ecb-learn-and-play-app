@@ -1,3 +1,5 @@
-.auth__form {
-    margin-top: 10vh;
+@media (min-width: 768px) and (orientation: portrait) {
+  .auth__panel {
+      margin-top: 40vh;
+  }
 }

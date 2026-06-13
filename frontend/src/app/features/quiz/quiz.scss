@@ -4,29 +4,30 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    background: #fff;
+    align-items: center;
 
     &__header {
         position: relative;
         flex-shrink: 0;
+        display: flex;
+        align-items: center;
         min-height: 22dvh;
         overflow: hidden;
-    }
-
-    &__header-bg {
-        position: absolute;
-        inset: 0;
+        color: #fff;
+        border: 1px dashed #c00;
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center top;
+        min-width: min(900px, 100%);
+        max-width: 1200px;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
     }
 
     app-game-header {
         position: relative;
-        z-index: 1;
+        z-index: 2;
         display: block;
-        padding-top: env(safe-area-inset-top, 0px);
+        width: 100%;
+        padding-top: 0;
     }
 
     &__card {
@@ -39,6 +40,10 @@
         position: relative;
         z-index: 2;
         min-height: 0;
+        width: 100%;
+        min-width: min(900px, 100%);
+        max-width: 1200px;
+        box-sizing: border-box;
     }
 
     &__cluster {
@@ -136,6 +141,100 @@
 
     .btn--primary {
         width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (orientation: portrait) {
+    .quiz-screen {
+        &__header {
+            min-height: clamp(18dvh, 22dvh, 26dvh);
+        }
+
+        &__timeline {
+            width: 48px;
+        }
+
+        &__cluster-name {
+            font-size: 0.85rem;
+        }
+
+        &__cluster-desc {
+            font-size: 0.8rem;
+        }
+
+        &__question {
+            font-size: 1.1rem;
+        }
+
+        &__points {
+            font-size: 0.85rem;
+        }
+
+        &__main {
+            padding: 16px 20px 28px;
+        }
+    }
+
+    .answer-btn {
+        padding: 16px 18px;
+        font-size: 0.95rem;
+
+        &__letter {
+            font-size: 2.15rem;
+        }
+    }
+}
+
+// Tablet landscape y PC (≥1025px): card ancha y respuestas en 2 columnas
+@media (min-width: 768px) and (orientation: landscape),
+       (min-width: 1025px) {
+    .quiz-screen {
+        max-width: none;
+        width: 100%;
+        align-items: center;
+        justify-content: flex-start;
+
+        &__card {
+            flex: 0 1 auto;
+            min-height: min(400px, 75dvh);
+            max-height: calc(100dvh - 22dvh - 24px);
+            height: auto;
+        }
+
+        &__body {
+            flex: 0 1 auto;
+        }
+
+        &__main {
+            flex: 0 1 auto;
+            overflow-y: auto;
+        }
+
+        &__question {
+            font-size: 1.1rem;
+        }
+
+        &__answers {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+            padding-right: 0;
+        }
+
+        &__answers .answer-btn {
+            flex: 0 0 45%;
+            max-width: 45%;
+            box-sizing: border-box;
+            font-size: 0.95rem;
+        }
+
+        .btn--primary {
+            display: block;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
 }
 

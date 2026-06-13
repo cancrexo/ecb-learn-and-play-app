@@ -10,12 +10,13 @@ import {
 import { AuthService } from '../../core/services/auth.service';
 import { GameService } from '../../core/services/game.service';
 import { GameHeaderComponent } from '../../shared/game-header/game-header';
+import { BrandLogoComponent } from '../../shared/brand-logo/brand-logo';
 import { PathTimelineComponent } from './path-timeline/path-timeline';
 
 @Component({
     selector: 'app-quiz',
     standalone: true,
-    imports: [GameHeaderComponent, PathTimelineComponent],
+    imports: [GameHeaderComponent, BrandLogoComponent, PathTimelineComponent],
     templateUrl: './quiz.html',
     styleUrl: './quiz.scss',
 })
