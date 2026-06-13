@@ -58,7 +58,7 @@ a {
 // Placeholder del logotipo (sustituir por imagen en brand-logo)
 .brand-logo {
     position: absolute;
-    top: calc(16px + var(--safe-top));
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
     width: min(280px, 72%);
@@ -77,6 +77,14 @@ a {
         text-transform: uppercase;
         color: #fff;
     }
+}
+
+.quiz-screen__header .brand-logo {
+    top: 50px;
+    right: 0;
+    transform: translateX(-30%);
+    min-height: 22dvh;
+    z-index: 0;
 }
 
 .screen--bg-common {
