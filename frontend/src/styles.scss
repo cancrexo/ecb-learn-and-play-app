@@ -92,10 +92,23 @@ a {
 
 .quiz-screen__header .brand-logo {
     top: 50px;
-    right: 0;
-    transform: translateX(-30%);
+    right: 5dvw;
+    left: auto;
+    transform: none;
     min-height: 22dvh;
     z-index: 0;
+}
+
+.quiz-screen__header .game-header--banner {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+}
+
+.quiz-screen__header .game-header__banner-info {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .clusters__panel,
