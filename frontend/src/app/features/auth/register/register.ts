@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
@@ -12,22 +12,39 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class RegisterComponent {
     username = '';
+    departmentId: number | '' = '';
     email = '';
     password = '';
     acceptTerms = false;
     error = signal('');
 
-    constructor(private auth: AuthService) {}
+    readonly departments = [
+        { id: 1, name: 'Department 1' },
+        { id: 2, name: 'Department 2' },
+        { id: 3, name: 'Department 3' },
+        { id: 4, name: 'Department 4' },
+        { id: 5, name: 'Department 5' },
+    ];
+
+    constructor(
+        private auth: AuthService,
+        private router: Router,
+    ) {}
 
     submit() {
         this.error.set('');
         this.auth.register({
             username: this.username,
+            department_id: Number(this.departmentId),
             email: this.email,
             password: this.password,
             accept_terms: this.acceptTerms,
         }).subscribe({
-            next: () => this.auth.navigateAfterAuth(),
+            next: () => {
+                this.router.navigate(['/verify-email'], {
+                    queryParams: { email: this.email },
+                });
+            },
             error: (err) => {
                 const msg = err.error?.errors
                     ? Object.values(err.error.errors).flat().join(' ')

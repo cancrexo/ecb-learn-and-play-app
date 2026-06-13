@@ -6,6 +6,16 @@ import { environment } from '../../../environments/environment';
 import { GameSession, User } from '../models/game.models';
 import { AUTH_TOKEN_KEY } from '../constants/auth.constants';
 
+export interface RegisterResponse {
+    message: string;
+    email: string;
+    email_verification_required: boolean;
+}
+
+export interface ResendVerificationResponse {
+    message: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     readonly user = signal<User | null>(null);
@@ -24,11 +34,19 @@ export class AuthService {
         return localStorage.getItem(AUTH_TOKEN_KEY);
     }
 
-    register(data: { username: string; email: string; password: string; accept_terms: boolean }) {
-        return this.http.post<{ token: string; user: User }>(`${environment.apiUrl}/register`, data).pipe(
+    register(data: { username: string; department_id: number; email: string; password: string; accept_terms: boolean }) {
+        return this.http.post<RegisterResponse>(`${environment.apiUrl}/register`, data);
+    }
+
+    verifyEmail(email: string, code: string) {
+        return this.http.post<{ token: string; user: User }>(`${environment.apiUrl}/verify-email`, { email, code }).pipe(
             tap((res) => this.storeAuthToken(res)),
             switchMap(() => this.fetchMe()),
         );
+    }
+
+    resendVerificationCode(email: string) {
+        return this.http.post<ResendVerificationResponse>(`${environment.apiUrl}/resend-verification-code`, { email });
     }
 
     login(login: string, password: string) {

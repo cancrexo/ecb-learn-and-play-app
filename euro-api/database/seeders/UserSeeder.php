@@ -35,6 +35,8 @@ class UserSeeder extends Seeder
                 ['email' => $player['email']],
                 [
                     'username' => $player['username'],
+                    'department_id' => 1,
+                    'email_verified_at' => $now,
                     'password' => $player['password'],
                     'registered_at' => $now,
                     'last_access' => $now,

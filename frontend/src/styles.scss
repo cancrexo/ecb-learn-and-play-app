@@ -168,7 +168,8 @@ a {
 
         input[type='text'],
         input[type='email'],
-        input[type='password'] {
+        input[type='password'],
+        select {
             padding: 14px 16px;
             border: none;
             border-radius: 6px;
@@ -176,11 +177,16 @@ a {
             font-family: inherit;
             text-transform: none;
             color: #64748b;
+            background: #fff;
 
             &::placeholder {
                 color: #94a3b8;
                 text-transform: uppercase;
             }
+        }
+
+        select:invalid {
+            color: #94a3b8;
         }
     }
 
@@ -199,6 +205,28 @@ a {
     &__error {
         color: #ffcdd2;
         font-size: 0.9rem;
+    }
+
+    &__info {
+        color: #e0f2f1;
+        font-size: 0.9rem;
+    }
+
+    &__link-btn {
+        background: none;
+        border: none;
+        padding: 0;
+        font: inherit;
+        color: inherit;
+        text-decoration: underline;
+        font-weight: 600;
+        cursor: pointer;
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            text-decoration: none;
+        }
     }
 
     &__link {
