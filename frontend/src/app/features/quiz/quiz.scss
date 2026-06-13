@@ -10,10 +10,6 @@
         flex-shrink: 0;
         min-height: 22dvh;
         overflow: hidden;
-        background-image: url('/img/backgrounds/back-ground-common.jpg');
-        background-size: 180% auto;
-        background-position: center -120px;
-        background-repeat: no-repeat;
         color: #fff;
     }
 
@@ -131,12 +127,6 @@
 
     .btn--primary {
         width: 100%;
-    }
-}
-
-@media (min-width: 768px) {
-    .quiz-screen__header {
-        background-image: none;
     }
 }
 

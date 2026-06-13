@@ -34,6 +34,19 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+// Fondo común a pantalla completa (todos los viewports de momento)
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: url('/img/backgrounds/back-ground-common.jpg');
+    background-repeat: no-repeat;
+    background-size: 180% auto;
+    background-position: center -120px;
+    pointer-events: none;
+}
+
 a {
     color: inherit;
 }
@@ -50,9 +63,7 @@ a {
         calc(16px + var(--safe-left));
     display: flex;
     flex-direction: column;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center top;
+    color: #fff;
 }
 
 // Placeholder del logotipo (sustituir por imagen en brand-logo)
@@ -85,13 +96,6 @@ a {
     transform: translateX(-30%);
     min-height: 22dvh;
     z-index: 0;
-}
-
-.screen--bg-common {
-    background-image: url('/img/backgrounds/back-ground-common.jpg');
-    background-size: 180% auto;
-    background-position: center -120px;
-    color: #fff;
 }
 
 .clusters__panel,
@@ -145,6 +149,19 @@ a {
 
         &__label {
             font-size: 1.25rem;
+        }
+    }
+
+    &--2 .brand-logo {
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(280px, 72%);
+        height: 72px;
+        opacity: 1;
+
+        &__label {
+            font-size: 0.7rem;
         }
     }
 
@@ -249,8 +266,9 @@ a {
     }
 
     &__error {
-        color: #ffcdd2;
+        color: #555;
         font-size: 0.9rem;
+        text-align: center;
     }
 
     &__info {
@@ -668,25 +686,6 @@ a {
             opacity: 0.5;
             cursor: not-allowed;
         }
-    }
-}
-
-// Fondo wide a pantalla completa: tablet (portrait + landscape) y desktop
-@media (min-width: 768px) {
-    body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        background-image: url('/img/backgrounds/back-ground-wide.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center top;
-        pointer-events: none;
-    }
-
-    .screen--bg-common {
-        background-image: none;
     }
 }
 
