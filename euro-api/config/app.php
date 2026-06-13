@@ -123,4 +123,15 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Allowed email domain for registration
+    |--------------------------------------------------------------------------
+    |
+    | If set, only emails from this domain can register. Empty = no restriction.
+    |
+    */
+
+    'users_domain' => env('USERS_DOMAIN', ''),
+
 ];

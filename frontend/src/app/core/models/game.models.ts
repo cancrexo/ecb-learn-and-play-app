@@ -7,7 +7,9 @@ export interface ClusterInfo {
 export interface User {
     id: number;
     username: string;
+    department_id?: number;
     email: string;
+    email_verified_at?: string | null;
 }
 
 export interface GameSession {

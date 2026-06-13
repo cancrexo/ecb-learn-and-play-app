@@ -1,0 +1,36 @@
+<div class="screen screen--bg-common auth">
+    <h1 class="auth__title">Verify email</h1>
+    <p class="auth__subtitle">We sent a 6-digit code to {{ email }}. It expires in 20 minutes.</p>
+    <form (ngSubmit)="submit()" class="auth__form">
+        <label>
+            <input
+                type="text"
+                [(ngModel)]="code"
+                name="code"
+                placeholder="Verification code"
+                required
+                maxlength="6"
+                pattern="[0-9]{6}"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+            />
+        </label>
+        @if (error()) {
+            <p class="auth__error">{{ error() }}</p>
+        }
+        @if (info()) {
+            <p class="auth__info">{{ info() }}</p>
+        }
+        <button type="submit" class="btn btn--primary" [disabled]="code.length !== 6">Verify</button>
+    </form>
+    <p class="auth__link">
+        <button type="button" class="auth__link-btn" [disabled]="resendCooldown() > 0" (click)="resend()">
+            @if (resendCooldown() > 0) {
+                Resend code ({{ resendCooldown() }}s)
+            } @else {
+                Resend code
+            }
+        </button>
+    </p>
+    <p class="auth__link">Already verified? <a routerLink="/login">Login</a></p>
+</div>
