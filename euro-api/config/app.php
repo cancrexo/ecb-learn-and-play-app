@@ -134,4 +134,15 @@ return [
 
     'users_domain' => env('USERS_DOMAIN', ''),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Frontend URL (Angular SPA)
+    |--------------------------------------------------------------------------
+    |
+    | Base URL for links in emails (password reset, etc.). No trailing slash.
+    |
+    */
+
+    'frontend_url' => env('FRONTEND_URL', 'http://localhost:4700'),
+
 ];

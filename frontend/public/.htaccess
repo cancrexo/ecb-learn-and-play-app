@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Archivos y carpetas reales (js, css, img, favicon...)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # API Laravel bajo /backend — no interceptar
+    RewriteRule ^backend - [L]
+
+    # SPA Angular: cualquier otra ruta → index.html
+    RewriteRule ^ index.html [L]
+</IfModule>

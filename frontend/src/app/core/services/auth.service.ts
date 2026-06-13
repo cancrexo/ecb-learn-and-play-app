@@ -16,6 +16,10 @@ export interface ResendVerificationResponse {
     message: string;
 }
 
+export interface PasswordResetRequestResponse {
+    message: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     readonly user = signal<User | null>(null);
@@ -47,6 +51,22 @@ export class AuthService {
 
     resendVerificationCode(email: string) {
         return this.http.post<ResendVerificationResponse>(`${environment.apiUrl}/resend-verification-code`, { email });
+    }
+
+    requestPasswordReset(email: string) {
+        return this.http.post<PasswordResetRequestResponse>(`${environment.apiUrl}/forgot-password`, { email });
+    }
+
+    resetPassword(email: string, token: string, password: string, passwordConfirmation: string) {
+        return this.http.post<{ token: string; user: User }>(`${environment.apiUrl}/reset-password`, {
+            email,
+            token,
+            password,
+            password_confirmation: passwordConfirmation,
+        }).pipe(
+            tap((res) => this.storeAuthToken(res)),
+            switchMap(() => this.fetchMe()),
+        );
     }
 
     login(login: string, password: string) {

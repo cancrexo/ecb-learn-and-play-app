@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\EmailVerificationService;
+use App\Services\PasswordResetService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,10 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function __construct(private EmailVerificationService $emailVerification) {}
+    public function __construct(
+        private EmailVerificationService $emailVerification,
+        private PasswordResetService $passwordReset,
+    ) {}
 
     public function register(Request $request): JsonResponse
     {
@@ -144,6 +148,41 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
 
         return response()->json(['message' => 'Logged out successfully.']);
+    }
+
+    public function forgotPassword(Request $request): JsonResponse
+    {
+        $data = $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $this->passwordReset->sendResetLink($data['email']);
+
+        return response()->json([
+            'message' => 'If an account exists, we sent a reset link to your email.',
+        ]);
+    }
+
+    public function resetPassword(Request $request): JsonResponse
+    {
+        $data = $request->validate([
+            'email' => 'required|email',
+            'token' => 'required|string',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user = $this->passwordReset->resetPassword(
+            $data['email'],
+            $data['token'],
+            $data['password'],
+        );
+
+        $token = $user->createToken('spa')->plainTextToken;
+
+        return response()->json([
+            'token' => $token,
+            'user' => $this->formatUser($user),
+        ]);
     }
 
     public function me(Request $request): JsonResponse

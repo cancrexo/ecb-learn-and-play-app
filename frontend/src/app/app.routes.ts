@@ -5,6 +5,8 @@ import { Splash2Component } from './features/splash/splash2/splash2';
 import { LoginComponent } from './features/auth/login/login';
 import { RegisterComponent } from './features/auth/register/register';
 import { VerifyEmailComponent } from './features/auth/verify-email/verify-email';
+import { ForgotPasswordComponent } from './features/auth/forgot-password/forgot-password';
+import { ResetPasswordComponent } from './features/auth/reset-password/reset-password';
 import { InstructionsComponent } from './features/instructions/instructions';
 import { ClustersComponent } from './features/clusters/clusters';
 import { QuizComponent } from './features/quiz/quiz';
@@ -17,6 +19,8 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
     { path: 'register', component: RegisterComponent, canActivate: [guestGuard] },
     { path: 'verify-email', component: VerifyEmailComponent, canActivate: [guestGuard] },
+    { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [guestGuard] },
+    { path: 'reset-password', component: ResetPasswordComponent, canActivate: [guestGuard] },
     { path: 'instructions', component: InstructionsComponent, canActivate: [authGuard] },
     { path: 'clusters', component: ClustersComponent, canActivate: [authGuard] },
     { path: 'quiz/:clusterId', component: QuizComponent, canActivate: [authGuard] },

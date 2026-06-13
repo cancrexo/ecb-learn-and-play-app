@@ -111,6 +111,18 @@ DB_HOST=localhost
 DB_DATABASE=learnandplay
 DB_USERNAME=tu_usuario
 DB_PASSWORD=tu_password
+
+# URL del frontend (enlaces de reset de contraseña). Sin barra final.
+FRONTEND_URL=https://ecebgamapp.midominio.com
+
+# SMTP del hosting (necesario para verificación de email y reset de contraseña)
+MAIL_MAILER=smtp
+MAIL_HOST=
+MAIL_PORT=587
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_FROM_ADDRESS=
+MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 ### 2.3 Instalar dependencias y migrar
@@ -173,19 +185,30 @@ $app->handleRequest(Request::capture());
 
 ---
 
-## Paso 4 — Regla SPA en la raíz (solo si hace falta)
+## Paso 4 — Regla SPA en la raíz
 
-Si al **recargar** `/login` o `/clusters` aparece **404**, crea o edita `public_html/.htaccess`:
+El build incluye `frontend/public/.htaccess` → se copia a `www/` al compilar.  
+Si al **recargar** `/login`, `/reset-password` o `/clusters` aparece **404**, comprueba que ese `.htaccess` está en la raíz de `public_html/`:
 
 ```apache
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} !^/backend
-RewriteRule ^ index.html [L]
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    RewriteRule ^backend - [L]
+
+    RewriteRule ^ index.html [L]
+</IfModule>
 ```
 
 Sirve `index.html` para las rutas de Angular. No afecta a `/backend`.
+
+**Local con `ng serve`:** no hace falta `.htaccess`; el dev server ya redirige rutas.  
+**Local sirviendo `www/` con otro servidor:** usa modo SPA (p. ej. `npx serve www -s`).
 
 ---
 
