@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 import { RankingData } from '../../core/models/game.models';
 import { AuthService } from '../../core/services/auth.service';
 import { GameService } from '../../core/services/game.service';
+import { BrandLogoComponent } from '../../shared/brand-logo/brand-logo';
 
 @Component({
     selector: 'app-game-over',
     standalone: true,
+    imports: [BrandLogoComponent],
     templateUrl: './game-over.html',
     styleUrl: './game-over.scss',
 })

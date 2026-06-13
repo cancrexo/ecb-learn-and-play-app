@@ -4,22 +4,17 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    background: #fff;
 
     &__header {
         position: relative;
         flex-shrink: 0;
         min-height: 22dvh;
         overflow: hidden;
-    }
-
-    &__header-bg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center top;
+        background-image: url('/img/backgrounds/back-ground-common.jpg');
+        background-size: 180% auto;
+        background-position: center -120px;
+        background-repeat: no-repeat;
+        color: #fff;
     }
 
     app-game-header {
@@ -136,6 +131,53 @@
 
     .btn--primary {
         width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .quiz-screen__header {
+        background-image: none;
+    }
+}
+
+@media (min-width: 768px) and (orientation: portrait) {
+    .quiz-screen {
+        &__header {
+            min-height: clamp(18dvh, 22dvh, 26dvh);
+        }
+
+        &__timeline {
+            width: 48px;
+        }
+
+        &__cluster-name {
+            font-size: 0.85rem;
+        }
+
+        &__cluster-desc {
+            font-size: 0.8rem;
+        }
+
+        &__question {
+            font-size: 1.1rem;
+        }
+
+        &__points {
+            font-size: 0.85rem;
+        }
+
+        &__main {
+            padding: 16px 20px 28px;
+        }
+    }
+
+    .answer-btn {
+        padding: 16px 18px;
+        font-size: 0.95rem;
+
+        &__letter {
+            font-size: 2.15rem;
+        }
     }
 }
 
