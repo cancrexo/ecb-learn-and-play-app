@@ -19,7 +19,10 @@
 
 // splash1: logo ampliado (×4.096 respecto al base)
 :host-context(app-root:has(app-splash1)) .logo {
-    width: min(calc(72vw * 4.096), 819px);
+    top: calc(24px - 10dvh);
+    left: 50%;
+    transform: translateX(calc(-50% + 3vw));
+    width: min(calc(72vw * 3.973), 794px);
 }
 
 // Logo horizontal: splash2, login, forgot-password
@@ -29,13 +32,13 @@
     .logo {
         top: calc(24px - 15dvh);
         left: 50%;
-        transform: translateX(calc(-50% + 20vw));
-        width: min(calc(72vw * 4.212), 842px);
+        transform: translateX(calc(-50% + 21vw));
+        width: min(calc(72vw * 4.086), 817px);
         aspect-ratio: 2560 / 1440;
     }
 }
 
-// Logo horizontal −10%: register, instructions, clusters, summary, game-over
+// Logo horizontal −10% y −3%: register, instructions, clusters, summary, game-over
 :host-context(app-root:has(app-register)),
 :host-context(app-root:has(app-instructions)),
 :host-context(app-root:has(app-clusters)),
@@ -44,8 +47,8 @@
     .logo {
         top: calc(24px - 15dvh);
         left: 50%;
-        transform: translateX(calc(-50% + 20vw));
-        width: min(calc(72vw * 3.791), 758px);
+        transform: translateX(calc(-50% + 21vw));
+        width: min(calc(72vw * 3.677), 735px);
         aspect-ratio: 2560 / 1440;
     }
 }
