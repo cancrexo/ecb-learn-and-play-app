@@ -17,49 +17,37 @@
     }
 }
 
-// splash1: logo ampliado (×4.096 respecto al base)
+// splash1: logo ampliado (+20% respecto a 3.973 / 794px)
 :host-context(app-root:has(app-splash1)) .logo {
     top: calc(24px - 10dvh);
     left: 50%;
     transform: translateX(calc(-50% + 3vw));
-    width: min(calc(72vw * 3.973), 794px);
+    width: min(calc(72vw * 4.768), 953px);
 }
 
-// Logo horizontal: splash2, login, forgot-password
-:host-context(app-root:has(app-splash2)),
-:host-context(app-root:has(app-login)),
-:host-context(app-root:has(app-forgot-password)) {
-    .logo {
-        top: calc(24px - 15dvh);
-        left: 50%;
-        transform: translateX(calc(-50% + 21vw));
-        width: min(calc(72vw * 4.086), 817px);
-        aspect-ratio: 2560 / 1440;
-    }
+// Logo horizontal: splash2, login, register, forgot-password, instructions, clusters, summary, game-over
+:host-context(app-root:has(app-splash2)) .logo,
+:host-context(app-root:has(app-login)) .logo,
+:host-context(app-root:has(app-register)) .logo,
+:host-context(app-root:has(app-forgot-password)) .logo,
+:host-context(app-root:has(app-instructions)) .logo,
+:host-context(app-root:has(app-clusters)) .logo,
+:host-context(app-root:has(app-summary)) .logo,
+:host-context(app-root:has(app-game-over)) .logo {
+    top: calc(24px - 5dvh);
+    left: 50%;
+    transform: translateX(calc(-50% + 5vw));
+    width: min(calc(72vw * 4.086), 817px);
+    aspect-ratio: 2560 / 1440;
 }
 
-// Logo horizontal −10% y −3%: register, instructions, clusters, summary, game-over
-:host-context(app-root:has(app-register)),
-:host-context(app-root:has(app-instructions)),
-:host-context(app-root:has(app-clusters)),
-:host-context(app-root:has(app-summary)),
-:host-context(app-root:has(app-game-over)) {
-    .logo {
-        top: calc(24px - 15dvh);
-        left: 50%;
-        transform: translateX(calc(-50% + 21vw));
-        width: min(calc(72vw * 3.677), 735px);
-        aspect-ratio: 2560 / 1440;
-    }
-}
-
-// Logo horizontal al 50% de register: quiz
+// Logo horizontal quiz (+43% respecto al tamaño base 2.18 / 436px)
 :host-context(app-root:has(app-quiz)) {
     .logo {
         top: calc(24px - 5dvh);
         left: 50%;
-        transform: translateX(calc(-50% + 35vw));
-        width: min(calc(72vw * 2.18), 436px);
+        transform: translateX(calc(-50% + 31vw));
+        width: min(calc(72vw * 3.117), 624px);
         aspect-ratio: 2560 / 1440;
     }
 }

@@ -759,8 +759,17 @@ a {
     }
 }
 
-// Quiz: fondo anclado arriba a la izquierda
+// Quiz: fondo anclado arriba a la izquierda (solo móvil)
 body.quiz-route {
     background-position: -60px -200px;
     background-size: 200% auto;
+}
+
+// Tablet portrait: cover en todo el body (después de .quiz-route para ganar en cascada)
+@media (min-width: 768px) and (orientation: portrait) {
+    body,
+    body.quiz-route {
+        background-size: cover;
+        background-position: 30% bottom;
+    }
 }
