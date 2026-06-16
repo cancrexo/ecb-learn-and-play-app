@@ -2,12 +2,11 @@ import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { GameService } from '../../core/services/game.service';
-import { BrandLogoComponent } from '../../shared/brand-logo/brand-logo';
 
 @Component({
     selector: 'app-summary',
     standalone: true,
-    imports: [BrandLogoComponent],
+    imports: [],
     templateUrl: './summary.html',
     styleUrl: './summary.scss',
 })

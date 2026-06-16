@@ -2,14 +2,12 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { BrandLogoComponent } from '../../../shared/brand-logo/brand-logo';
 
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [FormsModule, RouterLink, BrandLogoComponent],
+    imports: [FormsModule, RouterLink],
     templateUrl: './login.html',
-    styleUrl: './login.scss',
 })
 export class LoginComponent {
     login = '';

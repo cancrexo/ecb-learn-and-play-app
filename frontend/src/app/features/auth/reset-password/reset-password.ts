@@ -2,12 +2,11 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { BrandLogoComponent } from '../../../shared/brand-logo/brand-logo';
 
 @Component({
     selector: 'app-reset-password',
     standalone: true,
-    imports: [FormsModule, RouterLink, BrandLogoComponent],
+    imports: [FormsModule, RouterLink],
     templateUrl: './reset-password.html',
     styleUrl: './reset-password.scss',
 })

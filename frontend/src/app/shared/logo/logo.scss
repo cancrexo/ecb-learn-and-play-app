@@ -1,0 +1,62 @@
+// Logotipo global (posición y tamaño se afinarán por breakpoint)
+.logo {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(72vw, 200px);
+    aspect-ratio: 2560 / 3800;
+    pointer-events: none;
+    z-index: 0;
+
+    &__img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+// splash1: logo ampliado (×4.096 respecto al base)
+:host-context(app-root:has(app-splash1)) .logo {
+    width: min(calc(72vw * 4.096), 819px);
+}
+
+// Logo horizontal: splash2, login, forgot-password
+:host-context(app-root:has(app-splash2)),
+:host-context(app-root:has(app-login)),
+:host-context(app-root:has(app-forgot-password)) {
+    .logo {
+        top: calc(24px - 15dvh);
+        left: 50%;
+        transform: translateX(calc(-50% + 20vw));
+        width: min(calc(72vw * 4.212), 842px);
+        aspect-ratio: 2560 / 1440;
+    }
+}
+
+// Logo horizontal −10%: register, instructions, clusters, summary, game-over
+:host-context(app-root:has(app-register)),
+:host-context(app-root:has(app-instructions)),
+:host-context(app-root:has(app-clusters)),
+:host-context(app-root:has(app-summary)),
+:host-context(app-root:has(app-game-over)) {
+    .logo {
+        top: calc(24px - 15dvh);
+        left: 50%;
+        transform: translateX(calc(-50% + 20vw));
+        width: min(calc(72vw * 3.791), 758px);
+        aspect-ratio: 2560 / 1440;
+    }
+}
+
+// Logo horizontal al 50% de register: quiz
+:host-context(app-root:has(app-quiz)) {
+    .logo {
+        top: calc(24px - 5dvh);
+        left: 50%;
+        transform: translateX(calc(-50% + 35vw));
+        width: min(calc(72vw * 2.18), 436px);
+        aspect-ratio: 2560 / 1440;
+    }
+}

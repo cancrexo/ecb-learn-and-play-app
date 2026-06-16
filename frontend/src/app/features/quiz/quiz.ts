@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
     AnswerResult,
@@ -10,17 +10,16 @@ import {
 import { AuthService } from '../../core/services/auth.service';
 import { GameService } from '../../core/services/game.service';
 import { GameHeaderComponent } from '../../shared/game-header/game-header';
-import { BrandLogoComponent } from '../../shared/brand-logo/brand-logo';
 import { PathTimelineComponent } from './path-timeline/path-timeline';
 
 @Component({
     selector: 'app-quiz',
     standalone: true,
-    imports: [GameHeaderComponent, BrandLogoComponent, PathTimelineComponent],
+    imports: [GameHeaderComponent, PathTimelineComponent],
     templateUrl: './quiz.html',
     styleUrl: './quiz.scss',
 })
-export class QuizComponent implements OnInit {
+export class QuizComponent implements OnInit, OnDestroy {
     /** Letras visuales para las opciones barajadas */
     readonly answerLetters = ['A', 'B', 'C', 'D'];
 
@@ -40,7 +39,12 @@ export class QuizComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        document.body.classList.add('quiz-route');
         this.loadState();
+    }
+
+    ngOnDestroy() {
+        document.body.classList.remove('quiz-route');
     }
 
     loadState() {

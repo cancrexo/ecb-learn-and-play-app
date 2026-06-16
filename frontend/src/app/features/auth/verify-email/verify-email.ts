@@ -2,14 +2,12 @@ import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { BrandLogoComponent } from '../../../shared/brand-logo/brand-logo';
 
 @Component({
     selector: 'app-verify-email',
     standalone: true,
-    imports: [FormsModule, RouterLink, BrandLogoComponent],
+    imports: [FormsModule, RouterLink],
     templateUrl: './verify-email.html',
-    styleUrl: './verify-email.scss',
 })
 export class VerifyEmailComponent implements OnInit, OnDestroy {
     email = '';

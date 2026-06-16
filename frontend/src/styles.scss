@@ -28,23 +28,15 @@
 
 body {
     margin: 0;
+    min-height: 100dvh;
     font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    background: var(--color-bg);
+    background-color: var(--color-bg);
+    background-image: url('/img/fondo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 30% bottom;
     color: #1e293b;
     -webkit-font-smoothing: antialiased;
-}
-
-// Fondo común a pantalla completa (todos los viewports de momento)
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background-image: url('/img/backgrounds/back-ground-common.jpg');
-    background-repeat: no-repeat;
-    background-size: 180% auto;
-    background-position: center -120px;
-    pointer-events: none;
 }
 
 a {
@@ -64,39 +56,11 @@ a {
     display: flex;
     flex-direction: column;
     color: #fff;
-}
 
-// Placeholder del logotipo (sustituir por imagen en brand-logo)
-.brand-logo {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(280px, 72%);
-    height: 72px;
-    background: #9ca3af;
-    z-index: 1;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &__label {
-        font-size: 0.7rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: #fff;
+    &.auth {
+        justify-content: flex-end;
+        min-height: 80dvh;
     }
-}
-
-.quiz-screen__header .brand-logo {
-    top: 50px;
-    right: 5dvw;
-    left: auto;
-    transform: none;
-    min-height: 22dvh;
-    z-index: 0;
 }
 
 .quiz-screen__header .game-header--banner {
@@ -152,32 +116,6 @@ a {
     justify-content: flex-end;
     text-align: center;
 
-    .brand-logo {
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        height: 80%;
-        opacity: 0.5;
-
-        &__label {
-            font-size: 1.25rem;
-        }
-    }
-
-    &--2 .brand-logo {
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: min(280px, 72%);
-        height: 72px;
-        opacity: 1;
-
-        &__label {
-            font-size: 0.7rem;
-        }
-    }
-
     &__content {
         flex: 1;
         display: flex;
@@ -210,7 +148,6 @@ a {
 .auth {
     &__panel {
         width: 100%;
-        margin-top: clamp(80px, 18vh, 160px);
     }
 
     &__title {
@@ -728,10 +665,6 @@ a {
     }
 
     .auth {
-        &__panel {
-            margin-top: clamp(100px, 28vh, 220px);
-        }
-
         &__title {
             font-size: 1.65rem;
         }
@@ -808,7 +741,7 @@ a {
     }
 }
 
-// Tablet landscape y desktop: contenedor más ancho (fondo wide vía body::before ≥768px)
+// Tablet landscape y desktop: contenedor más ancho
 @media (min-width: 768px) and (orientation: landscape),
        (min-width: 1024px) {
     :root {
@@ -824,4 +757,10 @@ a {
             calc(32px + var(--safe-bottom))
             calc(24px + var(--safe-left));
     }
+}
+
+// Quiz: fondo anclado arriba a la izquierda
+body.quiz-route {
+    background-position: -60px -200px;
+    background-size: 200% auto;
 }

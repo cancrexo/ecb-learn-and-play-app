@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { BrandLogoComponent } from '../../shared/brand-logo/brand-logo';
 
 @Component({
     selector: 'app-instructions',
     standalone: true,
-    imports: [RouterLink, BrandLogoComponent],
+    imports: [RouterLink],
     templateUrl: './instructions.html',
     styleUrl: './instructions.scss',
 })
