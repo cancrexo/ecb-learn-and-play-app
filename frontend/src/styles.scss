@@ -59,7 +59,7 @@ a {
 
     &.auth {
         justify-content: flex-end;
-        min-height: 80dvh;
+        min-height: 90dvh;
     }
 }
 
@@ -300,11 +300,11 @@ a {
 }
 
 .instructions {
-    flex: 1;
+    // flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 8px;
+    padding: 0 8px 10dvh;
 
     &__title {
         font-size: 1.1rem;

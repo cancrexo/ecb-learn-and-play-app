@@ -1,11 +1,19 @@
+
+@use 'sass:math';
 // Logotipo global (posición y tamaño se afinarán por breakpoint)
+$logov_w: 1801px;$logov_h: 1920px; // vertical
+$aspect_ratio_v: math.div(1801, 1920);
+
+$logoh_w: 2000px; $logoh_h: 1169px; // horizontal
+$aspect_ratio_h: math.div(2000, 1169);
+
 .logo {
     position: fixed;
     top: 24px;
     left: 50%;
     transform: translateX(-50%);
     width: min(72vw, 200px);
-    aspect-ratio: 2560 / 3800;
+    aspect-ratio: $aspect_ratio_v;
     pointer-events: none;
     z-index: 0;
 
@@ -19,10 +27,11 @@
 
 // splash1: logo ampliado (+20% respecto a 3.973 / 794px)
 :host-context(app-root:has(app-splash1)) .logo {
-    top: calc(24px - 10dvh);
-    left: 50%;
-    transform: translateX(calc(-50% + 3vw));
-    width: min(calc(72vw * 4.768), 953px);
+    top: 24px;
+    left: 70%;
+    // transform: translateX(calc(-50% + 3vw));
+    // width: min(calc(72vw * 4.768), 953px);
+    width: calc(72vw * 2.4);
 }
 
 // Logo horizontal: splash2, login, register, forgot-password, instructions, clusters, summary, game-over
@@ -34,11 +43,11 @@
 :host-context(app-root:has(app-clusters)) .logo,
 :host-context(app-root:has(app-summary)) .logo,
 :host-context(app-root:has(app-game-over)) .logo {
-    top: calc(24px - 5dvh);
-    left: 50%;
-    transform: translateX(calc(-50% + 5vw));
-    width: min(calc(72vw * 4.086), 817px);
-    aspect-ratio: 2560 / 1440;
+    top: -10dvh;
+    left: 75%;
+    // transform: translateX(-30%);
+    width: min(calc(72vw * 3.086), 620px);
+    aspect-ratio: $aspect_ratio_h;
 }
 
 // Logo horizontal quiz (+43% respecto al tamaño base 2.18 / 436px)
@@ -46,8 +55,39 @@
     .logo {
         top: calc(24px - 5dvh);
         left: 50%;
-        transform: translateX(calc(-50% + 31vw));
-        width: min(calc(72vw * 3.117), 624px);
-        aspect-ratio: 2560 / 1440;
+        transform: translateX(-10%);
+        width: min(calc(72vw * 3.117), 400px);
+        aspect-ratio: $aspect_ratio_h;
+    }
+}
+@media (min-width: 768px) and (orientation: portrait) {
+
+    :host-context(app-root:has(app-splash1)) .logo {
+        width: max(700px, 99vw);
+        left: 60%;
+    }
+  :host-context(app-root:has(app-splash2)) .logo,
+  :host-context(app-root:has(app-login)) .logo,
+  :host-context(app-root:has(app-register)) .logo,
+  :host-context(app-root:has(app-forgot-password)) .logo,
+  :host-context(app-root:has(app-instructions)) .logo,
+  :host-context(app-root:has(app-clusters)) .logo,
+  :host-context(app-root:has(app-summary)) .logo,
+  :host-context(app-root:has(app-game-over)) .logo {
+      top: -5dvh;
+      left: 65%;
+      // transform: translateX(-30%);
+      width: 90dvw;
+      aspect-ratio: $aspect_ratio_h;
+  }
+
+ }
+
+ @media (min-width: 1024px) and (orientation: portrait) {  }
+
+// Tablet grande en portrait (p. ej. iPad Pro)
+@media (min-width: 1024px) and (orientation: portrait) {
+    :host-context(app-root:has(app-splash1)) .logo {
+        width: max(700px, 99vw);
     }
 }

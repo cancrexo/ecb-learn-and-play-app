@@ -12,9 +12,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class LogoComponent {
     private router = inject(Router);
 
-    logoSrc = signal('/img/logo-capas-vertical.png');
-    logoWidth = signal(2560);
-    logoHeight = signal(3800);
+    logoSrc = signal('/img/logo-vertical.png');
+    logoWidth = signal(1801);
+    logoHeight = signal(1920);
 
     constructor() {
         this.applyRoute(this.router.url);
@@ -38,13 +38,13 @@ export class LogoComponent {
 
         if (useHorizontal) {
             this.logoSrc.set('/img/logo-horizontal.png');
-            this.logoWidth.set(2560);
-            this.logoHeight.set(1440);
+            this.logoWidth.set(2000);
+            this.logoHeight.set(1169);
             return;
         }
 
-        this.logoSrc.set('/img/logo-capas-vertical.png');
-        this.logoWidth.set(2560);
-        this.logoHeight.set(3800);
+        this.logoSrc.set('/img/logo-vertical.png');
+        this.logoWidth.set(1801);
+        this.logoHeight.set(1920);
     }
 }
