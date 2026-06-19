@@ -198,6 +198,12 @@ a {
             }
         }
 
+        input[type='text'],
+        input[type='email'],
+        input[type='password'] {
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.6);
+        }
+
         select:invalid {
             color: #94a3b8;
         }
@@ -414,6 +420,7 @@ a {
     color: #fff;
     cursor: pointer;
     text-align: center;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.6);
 
     &--1 { background: var(--color-cluster-1); }
     &--2 { background: var(--color-cluster-2); }
@@ -639,9 +646,16 @@ a {
     }
 }
 
-@media (min-width: 768px) and (orientation: portrait) {
+// Quiz: fondo anclado arriba a la izquierda (solo móvil)
+body.quiz-route {
+    background-position: -60px -200px;
+    background-size: 200% auto;
+}
+
+// Desktop (≥1024px)
+@media (min-width: 1024px) {
     :root {
-        --max-width: 640px;
+        --max-width: 720px;
         --panel-max-width: 400px;
         --panel-container-max-width: 480px;
     }
@@ -739,34 +753,7 @@ a {
             width: 80%;
         }
     }
-}
 
-// Tablet landscape y desktop: contenedor más ancho
-@media (min-width: 768px) and (orientation: landscape),
-       (min-width: 1024px) {
-    :root {
-        --max-width: 720px;
-        --panel-max-width: 400px;
-        --panel-container-max-width: 480px;
-    }
-
-    .screen {
-        padding:
-            calc(32px + var(--safe-top))
-            calc(24px + var(--safe-right))
-            calc(32px + var(--safe-bottom))
-            calc(24px + var(--safe-left));
-    }
-}
-
-// Quiz: fondo anclado arriba a la izquierda (solo móvil)
-body.quiz-route {
-    background-position: -60px -200px;
-    background-size: 200% auto;
-}
-
-// Tablet portrait: cover en todo el body (después de .quiz-route para ganar en cascada)
-@media (min-width: 768px) and (orientation: portrait) {
     body,
     body.quiz-route {
         background-size: cover;

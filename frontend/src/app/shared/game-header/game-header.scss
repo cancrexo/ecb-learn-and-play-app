@@ -52,7 +52,8 @@
     }
 }
 
-@media (min-width: 768px) and (orientation: portrait) {
+// Desktop (≥1024px)
+@media (min-width: 1024px) {
     .game-header {
         &--banner &__score {
             font-size: 1.65rem;

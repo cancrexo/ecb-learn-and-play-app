@@ -22,7 +22,7 @@
             </label>
             <label class="auth__checkbox">
                 <input type="checkbox" [(ngModel)]="acceptTerms" name="acceptTerms" required />
-                I accept the <a href="#" target="_blank">Terms &amp; Conditions</a>
+                I accept the <a routerLink="/terms">Terms &amp; Conditions</a>
             </label>
             @if (error()) {
                 <p class="auth__error">{{ error() }}</p>

@@ -1,0 +1,37 @@
+:host ::ng-deep {
+    .game-header__label,
+    .game-header__score {
+        display: none;
+    }
+}
+
+.terms-screen__main {
+    padding-top: 4px;
+}
+
+.terms-screen__paragraph {
+    margin: 0 0 16px;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: #334155;
+
+}
+
+.terms-screen__back {
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+}
+
+@media (min-width: 1024px) {
+    .terms-screen__paragraph {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .terms-screen__back {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

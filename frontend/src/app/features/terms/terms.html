@@ -1,0 +1,20 @@
+<div class="quiz-screen">
+    <header class="quiz-screen__header">
+        <app-game-header variant="banner" [score]="0" />
+    </header>
+
+    <div class="quiz-screen__card">
+        <div class="quiz-screen__cluster">
+            <p class="quiz-screen__cluster-name">Terms &amp; Conditions</p>
+        </div>
+
+        <div class="quiz-screen__body terms-screen__body">
+            <main class="quiz-screen__main terms-screen__main">
+                @for (paragraph of paragraphs; track $index) {
+                    <p class="terms-screen__paragraph">{{ paragraph }}</p>
+                }
+                <a routerLink="/register" class="btn btn--primary terms-screen__back">Back</a>
+            </main>
+        </div>
+    </div>
+</div>

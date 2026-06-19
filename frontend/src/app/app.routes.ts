@@ -12,6 +12,7 @@ import { ClustersComponent } from './features/clusters/clusters';
 import { QuizComponent } from './features/quiz/quiz';
 import { SummaryComponent } from './features/summary/summary';
 import { GameOverComponent } from './features/game-over/game-over';
+import { TermsComponent } from './features/terms/terms';
 
 export const routes: Routes = [
     { path: '', component: Splash1Component },
@@ -21,6 +22,7 @@ export const routes: Routes = [
     { path: 'verify-email', component: VerifyEmailComponent, canActivate: [guestGuard] },
     { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [guestGuard] },
     { path: 'reset-password', component: ResetPasswordComponent, canActivate: [guestGuard] },
+    { path: 'terms', component: TermsComponent },
     { path: 'instructions', component: InstructionsComponent, canActivate: [authGuard] },
     { path: 'clusters', component: ClustersComponent, canActivate: [authGuard] },
     { path: 'quiz/:clusterId', component: QuizComponent, canActivate: [authGuard] },
