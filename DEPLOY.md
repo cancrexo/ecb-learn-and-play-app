@@ -127,6 +127,47 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ### 2.3 Instalar dependencias y migrar
 
+Si **`composer` no está disponible** en el servidor (comando no encontrado), basta con dejar el archivo **`composer.phar`** dentro de la carpeta `euro-api/` y ejecutarlo con PHP.
+
+**Descargar `composer.phar` desde consola** (en tu PC o por SSH, dentro de `euro-api/`):
+
+```bash
+cd /home/tuusuario/euro-api
+
+# Opción A — instalador oficial (recomendado)
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+# Genera composer.phar en la carpeta actual
+
+# Opción B — descarga directa con curl
+curl -sS https://getcomposer.org/installer | php
+
+# Opción C — descarga directa del .phar (sin instalador)
+curl -sS -o composer.phar https://getcomposer.org/download/latest-stable/composer.phar
+```
+
+Comprueba que funciona:
+
+```bash
+php composer.phar --version
+```
+
+Luego instala dependencias y migra:
+
+```bash
+cd /home/tuusuario/euro-api
+php composer.phar install --no-dev --optimize-autoloader
+php artisan key:generate
+php artisan migrate --force
+php artisan config:cache
+chmod -R 775 storage bootstrap/cache
+```
+
+Si subes el archivo por FTP en lugar de descargarlo en el servidor, colócalo en `/home/tuusuario/euro-api/composer.phar` (misma carpeta que `artisan`).
+
+Si `composer` sí está instalado globalmente:
+
 ```bash
 cd /home/tuusuario/euro-api
 composer install --no-dev --optimize-autoloader
@@ -252,6 +293,7 @@ Sirve `index.html` para las rutas de Angular. No afecta a `/backend`.
 ```bash
 cd /home/tuusuario/euro-api
 composer install --no-dev
+# o, si no hay composer global: php composer.phar install --no-dev
 php artisan migrate --force
 php artisan config:cache
 ```

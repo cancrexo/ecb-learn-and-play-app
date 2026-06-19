@@ -2,12 +2,11 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { BrandLogoComponent } from '../../../shared/brand-logo/brand-logo';
 
 @Component({
     selector: 'app-forgot-password',
     standalone: true,
-    imports: [FormsModule, RouterLink, BrandLogoComponent],
+    imports: [FormsModule, RouterLink],
     templateUrl: './forgot-password.html',
     styleUrl: './forgot-password.scss',
 })

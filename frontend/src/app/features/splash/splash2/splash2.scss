@@ -1,0 +1,10 @@
+// splash-2: layout del bloque de contenido (altura explícita, no flex:1 del padre)
+.screen.splash.splash--2 {
+    justify-content: flex-end;
+}
+
+.screen.splash.splash--2 > .splash__content {
+    flex: none;
+    height: 60dvh;
+    justify-content: center;
+}

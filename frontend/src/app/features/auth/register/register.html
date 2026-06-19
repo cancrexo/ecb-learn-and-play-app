@@ -1,5 +1,4 @@
 <div class="screen auth">
-    <app-brand-logo />
     <div class="auth__panel">
         <h1 class="auth__title">Register</h1>
         <p class="auth__subtitle">Exclusive for ECB participants, with an email from the ECB.</p>
@@ -23,7 +22,7 @@
             </label>
             <label class="auth__checkbox">
                 <input type="checkbox" [(ngModel)]="acceptTerms" name="acceptTerms" required />
-                I accept the <a href="#" target="_blank">Terms &amp; Conditions</a>
+                I accept the <a routerLink="/terms">Terms &amp; Conditions</a>
             </label>
             @if (error()) {
                 <p class="auth__error">{{ error() }}</p>

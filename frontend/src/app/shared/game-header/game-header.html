@@ -1,6 +1,5 @@
 <header class="game-header" [class.game-header--banner]="variant === 'banner'">
     @if (variant === 'default') {
-        <span class="game-header__logo">Euro Learn &amp; Play</span>
         <span class="game-header__user">{{ auth.user()?.username }}</span>
         <span class="game-header__score">{{ score }} <span class="game-header__score-unit">points</span></span>
     } @else {

@@ -1,10 +1,13 @@
 .quiz-screen {
+    position: relative;
+    width: 90vw;
+    max-width: 1200px;
     min-height: 100dvh;
-    max-width: var(--max-width);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    // border: 1px dashed var(--color-muted);
 
     &__header {
         position: relative;
@@ -14,7 +17,6 @@
         min-height: 22dvh;
         overflow: hidden;
         color: #fff;
-        border: 1px dashed #c00;
         width: 100%;
         min-width: min(900px, 100%);
         max-width: 1200px;
@@ -144,8 +146,12 @@
     }
 }
 
-@media (min-width: 768px) and (orientation: portrait) {
+// Desktop (≥1024px): layout ancho y respuestas en 2 columnas
+@media (min-width: 1024px) {
     .quiz-screen {
+        align-items: center;
+        justify-content: flex-start;
+
         &__header {
             min-height: clamp(18dvh, 22dvh, 26dvh);
         }
@@ -162,37 +168,9 @@
             font-size: 0.8rem;
         }
 
-        &__question {
-            font-size: 1.1rem;
-        }
-
         &__points {
             font-size: 0.85rem;
         }
-
-        &__main {
-            padding: 16px 20px 28px;
-        }
-    }
-
-    .answer-btn {
-        padding: 16px 18px;
-        font-size: 0.95rem;
-
-        &__letter {
-            font-size: 2.15rem;
-        }
-    }
-}
-
-// Tablet landscape y PC (≥1025px): card ancha y respuestas en 2 columnas
-@media (min-width: 768px) and (orientation: landscape),
-       (min-width: 1025px) {
-    .quiz-screen {
-        max-width: none;
-        width: 100%;
-        align-items: center;
-        justify-content: flex-start;
 
         &__card {
             flex: 0 1 auto;
@@ -208,6 +186,7 @@
         &__main {
             flex: 0 1 auto;
             overflow-y: auto;
+            padding: 16px 20px 28px;
         }
 
         &__question {
@@ -234,6 +213,15 @@
             width: 50%;
             margin-left: auto;
             margin-right: auto;
+        }
+    }
+
+    .answer-btn {
+        padding: 16px 18px;
+        font-size: 0.95rem;
+
+        &__letter {
+            font-size: 2.15rem;
         }
     }
 }
