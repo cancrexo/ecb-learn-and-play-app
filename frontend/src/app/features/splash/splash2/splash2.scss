@@ -1,6 +1,11 @@
 // splash-2: layout del bloque de contenido (altura explícita, no flex:1 del padre)
 .screen.splash.splash--2 {
     justify-content: flex-end;
+
+    .splash__title,
+    .splash__text {
+        color: #000;
+    }
 }
 
 .screen.splash.splash--2 > .splash__content {

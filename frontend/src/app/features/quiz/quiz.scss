@@ -1,27 +1,41 @@
 .quiz-screen {
     position: relative;
-    width: 90vw;
-    max-width: 1200px;
+    width: 100%;
     min-height: 100dvh;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // border: 1px dashed var(--color-muted);
+    // border: 2px dashed #c00;
+    box-sizing: border-box;
 
     &__header {
         position: relative;
         flex-shrink: 0;
         display: flex;
         align-items: center;
-        min-height: 22dvh;
+        justify-content: center;
+        height: 13dvh;
         overflow: hidden;
         color: #fff;
         width: 100%;
         min-width: min(900px, 100%);
-        max-width: 1200px;
         box-sizing: border-box;
         padding-top: env(safe-area-inset-top, 0px);
+        background-image: url('/img/fondo-quiz.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+    }
+
+    &__header-info {
+        width: 100%;
+        max-width: 1200px;
+        align-self: stretch;
+        display: flex;
+        align-items: center;
+        // border: 2px solid yellow;
+        box-sizing: border-box;
     }
 
     app-game-header {
@@ -38,7 +52,7 @@
         flex-direction: column;
         background: #fff;
         border-radius: 0;
-        margin-top: -16px;
+        margin-top: 16px;
         position: relative;
         z-index: 2;
         min-height: 0;
@@ -46,6 +60,8 @@
         min-width: min(900px, 100%);
         max-width: 1200px;
         box-sizing: border-box;
+        align-items: center;
+        // border: 1px dashed #000;
     }
 
     &__cluster {
@@ -69,7 +85,8 @@
     }
 
     &__body {
-        flex: 1;
+        // flex: 1;
+        width:95%;
         display: flex;
         min-height: 0;
         padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -153,7 +170,7 @@
         justify-content: flex-start;
 
         &__header {
-            min-height: clamp(18dvh, 22dvh, 26dvh);
+           height: 22dvh
         }
 
         &__timeline {

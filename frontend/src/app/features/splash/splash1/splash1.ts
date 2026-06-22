@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,4 +8,12 @@ import { RouterLink } from '@angular/router';
     templateUrl: './splash1.html',
     styleUrl: './splash1.scss',
 })
-export class Splash1Component {}
+export class Splash1Component implements OnInit, OnDestroy {
+    ngOnInit() {
+        document.body.classList.add('splash1-route');
+    }
+
+    ngOnDestroy() {
+        document.body.classList.remove('splash1-route');
+    }
+}

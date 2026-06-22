@@ -55,16 +55,18 @@ $logo-desktop-quiz-w: 520px;
     aspect-ratio: $aspect_ratio_h;
 }
 
-// Logo horizontal quiz y terms (mismo layout)
-:host-context(app-root:has(app-quiz)),
-:host-context(app-root:has(app-terms)) {
-    .logo {
-        top: calc(24px - 5dvh);
-        left: 50%;
-        transform: translateX(-10%);
-        width: min(calc(72vw * 3.117), 400px);
-        aspect-ratio: $aspect_ratio_h;
-    }
+// Quiz: ocultar el logo global (va en game-header)
+:host-context(app-root:has(app-quiz)) {
+    display: none;
+}
+
+// Logo horizontal terms (mismo layout que quiz)
+:host-context(app-root:has(app-terms)) .logo {
+    top: calc(24px - 5dvh);
+    left: 50%;
+    transform: translateX(-10%);
+    width: min(calc(72vw * 3.117), 400px);
+    aspect-ratio: $aspect_ratio_h;
 }
 
 // Desktop (≥1024px)
@@ -91,7 +93,6 @@ $logo-desktop-quiz-w: 520px;
         max-width: 720px;
     }
 
-    :host-context(app-root:has(app-quiz)) .logo,
     :host-context(app-root:has(app-terms)) .logo {
         top: -5vh;
         left: calc(85%);
