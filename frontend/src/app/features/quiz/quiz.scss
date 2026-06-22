@@ -34,8 +34,11 @@
         align-self: stretch;
         display: flex;
         align-items: center;
-        // border: 2px solid yellow;
         box-sizing: border-box;
+        background-image: url('/img/logo-horizontal.png');
+        background-repeat: no-repeat;
+        background-size: auto 140%;
+        background-position: calc(100% + 20vw) center;
     }
 
     app-game-header {

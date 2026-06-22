@@ -1,9 +1,10 @@
 :host {
     display: block;
+    position: relative;
 }
 
 // Contenido de ruta por encima del logotipo fijo
-:host > :not(app-logo) {
+:host > :not(app-logo):not(app-dev-reset-fab) {
     position: relative;
     z-index: 1;
 }

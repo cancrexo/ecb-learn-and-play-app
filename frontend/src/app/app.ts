@@ -7,9 +7,9 @@ import { LogoComponent } from './shared/logo/logo';
     selector: 'app-root',
     imports: [RouterOutlet, DevResetFabComponent, LogoComponent],
     template: `
+        <app-dev-reset-fab />
         <app-logo />
         <router-outlet />
-        <app-dev-reset-fab />
     `,
     styleUrl: './app.scss',
 })
