@@ -1,0 +1,37 @@
+<div
+    class="dropdown"
+    [class.dropdown--open]="isOpen()"
+    [class.dropdown--placeholder]="!selectedLabel()"
+    [class.dropdown--disabled]="disabled()"
+>
+    <button
+        type="button"
+        class="dropdown__trigger"
+        [attr.aria-expanded]="isOpen()"
+        [attr.aria-haspopup]="'listbox'"
+        [disabled]="disabled()"
+        (click)="toggle($event)"
+    >
+        <span class="dropdown__label">{{ selectedLabel() || placeholder }}</span>
+        <span class="dropdown__chevron" aria-hidden="true"></span>
+    </button>
+
+    @if (isOpen()) {
+        <ul class="dropdown__menu" role="listbox">
+            @for (option of options; track option.value) {
+                <li role="presentation">
+                    <button
+                        type="button"
+                        class="dropdown__option"
+                        role="option"
+                        [class.dropdown__option--selected]="option.value === value()"
+                        [attr.aria-selected]="option.value === value()"
+                        (click)="select(option, $event)"
+                    >
+                        {{ option.label }}
+                    </button>
+                </li>
+            }
+        </ul>
+    }
+</div>

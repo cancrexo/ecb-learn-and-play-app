@@ -1,0 +1,116 @@
+.dropdown {
+    position: relative;
+    width: 100%;
+
+    &__trigger {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 14px 16px;
+        padding-right: calc(2vw + 1.25rem);
+        border: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-family: inherit;
+        text-align: left;
+        color: #64748b;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.6);
+        cursor: pointer;
+
+        &:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+    }
+
+    &--placeholder .dropdown__label {
+        color: #94a3b8;
+        text-transform: uppercase;
+    }
+
+    &__label {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__chevron {
+        position: absolute;
+        right: 2vw;
+        top: 50%;
+        width: 0.75em;
+        height: 0.75em;
+        transform: translateY(-50%);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        pointer-events: none;
+        transition: transform 0.2s ease;
+    }
+
+    &--open &__chevron {
+        transform: translateY(-50%) rotate(180deg);
+    }
+
+    &__menu {
+        position: absolute;
+        z-index: 20;
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        max-height: min(240px, 40dvh);
+        margin: 0;
+        padding: 6px 0;
+        list-style: none;
+        overflow-y: auto;
+        border-radius: 6px;
+        background: #fff;
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.35);
+    }
+
+    &__option {
+        display: block;
+        width: 100%;
+        padding: 12px 16px;
+        border: none;
+        font-size: 0.9rem;
+        font-family: inherit;
+        text-align: left;
+        color: #64748b;
+        background: transparent;
+        cursor: pointer;
+
+        &:hover,
+        &:focus-visible {
+            background: #f1f5f9;
+            outline: none;
+        }
+
+        &--selected {
+            font-weight: 600;
+            color: var(--color-primary);
+            background: #f8fafc;
+        }
+    }
+}
+
+@media (min-width: 600px) {
+    .dropdown {
+        &__trigger {
+            font-size: 1rem;
+            padding: 16px 18px;
+            padding-right: calc(2vw + 1.25rem);
+        }
+
+        &__option {
+            font-size: 1rem;
+            padding: 14px 18px;
+        }
+    }
+}

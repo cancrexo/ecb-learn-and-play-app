@@ -7,12 +7,13 @@
                 <input type="text" [(ngModel)]="username" name="username" placeholder="User name" required />
             </label>
             <label>
-                <select [(ngModel)]="departmentId" name="departmentId" required>
-                    <option value="" disabled>Department</option>
-                    @for (dept of departments; track dept.id) {
-                        <option [value]="dept.id">{{ dept.name }}</option>
-                    }
-                </select>
+                <app-dropdown
+                    [(ngModel)]="departmentId"
+                    name="departmentId"
+                    [options]="departmentOptions"
+                    placeholder="Department"
+                    required
+                />
             </label>
             <label>
                 <input type="email" [(ngModel)]="email" name="email" placeholder="Email from the ECB" required />

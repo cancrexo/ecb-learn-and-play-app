@@ -2,11 +2,12 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { DropdownComponent, DropdownOption } from '../../../shared/dropdown/dropdown';
 
 @Component({
     selector: 'app-register',
     standalone: true,
-    imports: [FormsModule, RouterLink],
+    imports: [FormsModule, RouterLink, DropdownComponent],
     templateUrl: './register.html',
     styleUrl: './register.scss',
 })
@@ -18,37 +19,37 @@ export class RegisterComponent {
     acceptTerms = false;
     error = signal('');
 
-    readonly departments = [
-        { id: 1, name: 'Banknotes' },
-        { id: 2, name: 'Communications' },
-        { id: 3, name: 'Corporate Services' },
-        { id: 4, name: 'Counsel to the Executive Board' },
-        { id: 5, name: 'Economics' },
-        { id: 6, name: 'ESRB Secretariat' },
-        { id: 7, name: 'Executive Board members' },
-        { id: 8, name: 'Governance & Transformation Services' },
-        { id: 9, name: 'Horizontal Line Supervision' },
-        { id: 10, name: 'Human Resources' },
-        { id: 11, name: 'Information Systems' },
-        { id: 12, name: 'Internal Audit' },
-        { id: 13, name: 'International & European Relations' },
-        { id: 14, name: 'Legal Services' },
-        { id: 15, name: 'Macroprudential Policy & Financial Stability' },
-        { id: 16, name: 'Market Infrastructure & Payments' },
-        { id: 17, name: 'Market Operations' },
-        { id: 18, name: 'Mediation Function' },
-        { id: 19, name: 'Monetary Policy' },
-        { id: 20, name: 'On-site & Internal Model Inspections' },
-        { id: 21, name: 'Organisational Effectiveness Group' },
-        { id: 22, name: 'Research' },
-        { id: 23, name: 'Risk Management' },
-        { id: 24, name: 'Secretariat' },
-        { id: 25, name: 'Specialised Institutions & LSIs' },
-        { id: 26, name: 'SSM Governance & Operations' },
-        { id: 27, name: 'Statistics' },
-        { id: 28, name: 'Supervisory Strategy & Risk' },
-        { id: 29, name: 'Systemic & International Banks' },
-        { id: 30, name: 'Universal & Diversified Institutions' },
+    readonly departmentOptions: DropdownOption<number>[] = [
+        { value: 1, label: 'Banknotes' },
+        { value: 2, label: 'Communications' },
+        { value: 3, label: 'Corporate Services' },
+        { value: 4, label: 'Counsel to the Executive Board' },
+        { value: 5, label: 'Economics' },
+        { value: 6, label: 'ESRB Secretariat' },
+        { value: 7, label: 'Executive Board members' },
+        { value: 8, label: 'Governance & Transformation Services' },
+        { value: 9, label: 'Horizontal Line Supervision' },
+        { value: 10, label: 'Human Resources' },
+        { value: 11, label: 'Information Systems' },
+        { value: 12, label: 'Internal Audit' },
+        { value: 13, label: 'International & European Relations' },
+        { value: 14, label: 'Legal Services' },
+        { value: 15, label: 'Macroprudential Policy & Financial Stability' },
+        { value: 16, label: 'Market Infrastructure & Payments' },
+        { value: 17, label: 'Market Operations' },
+        { value: 18, label: 'Mediation Function' },
+        { value: 19, label: 'Monetary Policy' },
+        { value: 20, label: 'On-site & Internal Model Inspections' },
+        { value: 21, label: 'Organisational Effectiveness Group' },
+        { value: 22, label: 'Research' },
+        { value: 23, label: 'Risk Management' },
+        { value: 24, label: 'Secretariat' },
+        { value: 25, label: 'Specialised Institutions & LSIs' },
+        { value: 26, label: 'SSM Governance & Operations' },
+        { value: 27, label: 'Statistics' },
+        { value: 28, label: 'Supervisory Strategy & Risk' },
+        { value: 29, label: 'Systemic & International Banks' },
+        { value: 30, label: 'Universal & Diversified Institutions' },
     ];
 
     constructor(

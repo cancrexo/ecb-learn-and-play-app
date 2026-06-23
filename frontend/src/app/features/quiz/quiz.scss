@@ -38,7 +38,7 @@
         background-image: url('/img/logo-horizontal.png');
         background-repeat: no-repeat;
         background-size: auto 140%;
-        background-position: calc(100% + 20vw) center;
+        background-position: 100% center;
     }
 
     app-game-header {
@@ -181,11 +181,11 @@
         }
 
         &__cluster-name {
-            font-size: 0.85rem;
+            font-size: 1.5rem;
         }
 
         &__cluster-desc {
-            font-size: 0.8rem;
+            font-size: 1.2rem;
         }
 
         &__points {

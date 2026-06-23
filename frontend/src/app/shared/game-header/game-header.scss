@@ -70,4 +70,19 @@
             font-size: 0.7rem;
         }
     }
+
+    // Quiz: texto de usuario y puntuación más grande en escritorio
+    :host-context(.quiz-screen) .game-header {
+        &__user {
+            font-size: 2.06rem;
+        }
+
+        &__label {
+            font-size: 1.52rem;
+        }
+
+        &--banner &__score {
+            font-size: 3.57rem;
+        }
+    }
 }
