@@ -25,7 +25,6 @@ class AuthController extends Controller
             'department_id' => 'required|integer|min:1|max:30',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:6',
-            'accept_terms' => 'accepted',
             'accept_data_protection' => 'accepted',
         ]);
 

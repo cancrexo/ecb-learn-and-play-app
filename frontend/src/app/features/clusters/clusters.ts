@@ -50,7 +50,7 @@ export class ClustersComponent implements OnInit {
     private loadClusters() {
         this.game.getClusters().subscribe({
             next: (res) => this.clusters.set(res.clusters),
-            error: () => this.error.set('Could not load clusters'),
+            error: () => this.error.set('Could not load levels'),
         });
     }
 
@@ -65,7 +65,7 @@ export class ClustersComponent implements OnInit {
                     this.router.navigate(['/quiz', cluster.id]);
                 });
             },
-            error: (err) => this.error.set(err.error?.message || 'Could not start cluster'),
+            error: (err) => this.error.set(err.error?.message || 'Could not start level'),
         });
     }
 }

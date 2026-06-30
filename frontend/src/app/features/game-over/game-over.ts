@@ -66,7 +66,7 @@ export class GameOverComponent implements OnInit {
             return;
         }
 
-        if (!confirm('Exit the game? You will need to log in again to play.')) {
+        if (!confirm('Exit the quiz? You will need to log in again to play.')) {
             return;
         }
 
@@ -75,7 +75,7 @@ export class GameOverComponent implements OnInit {
             next: () => this.auth.logout({ redirectTo: '/' }),
             error: () => {
                 this.exiting.set(false);
-                alert('Could not exit the game.');
+                alert('Could not exit the quiz.');
             },
         });
     }

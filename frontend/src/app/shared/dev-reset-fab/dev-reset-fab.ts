@@ -22,7 +22,7 @@ export class DevResetFabComponent {
             return;
         }
 
-        if (!confirm('Reset game progress and log out? (dev only)')) {
+        if (!confirm('Reset quiz progress and log out? (dev only)')) {
             return;
         }
 

@@ -43,7 +43,6 @@ export class AuthService {
         department_id: number;
         email: string;
         password: string;
-        accept_terms: boolean;
         accept_data_protection: boolean;
     }) {
         return this.http.post<RegisterResponse>(`${environment.apiUrl}/register`, data);

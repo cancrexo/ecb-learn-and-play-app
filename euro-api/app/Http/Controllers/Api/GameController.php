@@ -78,7 +78,7 @@ class GameController extends Controller
             return response()->json(['message' => $e->getMessage()], 422);
         }
 
-        return response()->json(['message' => 'Game paused.']);
+        return response()->json(['message' => 'Quiz paused.']);
     }
 
     public function restart(Request $request): JsonResponse
@@ -90,7 +90,7 @@ class GameController extends Controller
         }
 
         return response()->json([
-            'message' => 'Game restarted.',
+            'message' => 'Quiz restarted.',
             'session' => [
                 'id' => $session->id,
                 'status' => $session->status,
@@ -110,6 +110,6 @@ class GameController extends Controller
     {
         $this->gameService->abandonProgress($request->user());
 
-        return response()->json(['message' => 'Game progress reset.']);
+        return response()->json(['message' => 'Quiz progress reset.']);
     }
 }

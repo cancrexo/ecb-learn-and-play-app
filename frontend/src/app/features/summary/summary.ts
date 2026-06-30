@@ -54,7 +54,7 @@ export class SummaryComponent implements OnInit {
             next: () => this.auth.logout({ redirectTo: '/' }),
             error: () => {
                 this.pausing.set(false);
-                alert('Could not pause the game.');
+                alert('Could not pause the quiz.');
             },
         });
     }

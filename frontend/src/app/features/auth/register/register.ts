@@ -16,7 +16,6 @@ export class RegisterComponent {
     departmentId: number | '' = '';
     email = '';
     password = '';
-    acceptTerms = false;
     acceptDataProtection = false;
     error = signal('');
 
@@ -68,7 +67,6 @@ export class RegisterComponent {
             department_id: Number(this.departmentId),
             email: this.email,
             password: this.password,
-            accept_terms: this.acceptTerms,
             accept_data_protection: this.acceptDataProtection,
         }).subscribe({
             next: () => {

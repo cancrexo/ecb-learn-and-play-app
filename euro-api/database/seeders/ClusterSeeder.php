@@ -11,22 +11,22 @@ class ClusterSeeder extends Seeder
     {
         $clusters = [
             [
-                'name' => 'Cluster 1',
+                'name' => 'Level 1',
                 'description' => 'What is the digital euro?',
                 'sort_order' => 1,
             ],
             [
-                'name' => 'Cluster 2',
+                'name' => 'Level 2',
                 'description' => 'How would it work?',
                 'sort_order' => 2,
             ],
             [
-                'name' => 'Cluster 3',
+                'name' => 'Level 3',
                 'description' => 'Privacy, trust and safeguards',
                 'sort_order' => 3,
             ],
             [
-                'name' => 'Cluster 4',
+                'name' => 'Level 4',
                 'description' => 'Behind the digital euro',
                 'sort_order' => 4,
             ],

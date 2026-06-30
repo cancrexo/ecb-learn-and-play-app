@@ -37,7 +37,7 @@ class GameService
 
             return [
                 'id' => $cluster->id,
-                'name' => $cluster->name,
+                'name' => preg_replace('/^Cluster\s+/i', 'Level ', $cluster->name),
                 'description' => $cluster->description,
                 'sort_order' => $cluster->sort_order,
                 'status' => $status,
@@ -58,7 +58,7 @@ class GameService
             ) {
                 $clusterData = collect($this->getClustersWithProgress($user))->firstWhere('id', $clusterId);
                 if (! $clusterData || ! in_array($clusterData['status'], ['available', 'in_progress'], true)) {
-                    throw new InvalidArgumentException('This cluster is not available.');
+                    throw new InvalidArgumentException('This level is not available.');
                 }
                 $firstQuestion = Question::where('cluster_id', $clusterId)->orderBy('id_question')->firstOrFail();
                 $activeSession->status = 'in_progress';
@@ -67,11 +67,11 @@ class GameService
                 $activeSession->save();
                 return $activeSession;
             }
-            throw new InvalidArgumentException('You already have an active game session.');
+            throw new InvalidArgumentException('You already have an active quiz session.');
         }
 
         if ($user->completedGameSession()) {
-            throw new InvalidArgumentException('You must restart the game before starting again.');
+            throw new InvalidArgumentException('You must restart the quiz before starting again.');
         }
 
         $cluster = Cluster::findOrFail($clusterId);
@@ -79,7 +79,7 @@ class GameService
         $clusterData = collect($clusters)->firstWhere('id', $clusterId);
 
         if (! $clusterData || ! in_array($clusterData['status'], ['available', 'in_progress'], true)) {
-            throw new InvalidArgumentException('This cluster is not available.');
+            throw new InvalidArgumentException('This level is not available.');
         }
 
         $firstQuestion = Question::where('cluster_id', $clusterId)->orderBy('id_question')->firstOrFail();
@@ -127,7 +127,7 @@ class GameService
         $session = $user->activeGameSession();
 
         if (! $session || $session->status === 'paused') {
-            throw new InvalidArgumentException('There is no active game session.');
+            throw new InvalidArgumentException('There is no active quiz session.');
         }
 
         $question = Question::findOrFail($questionId);
@@ -175,7 +175,7 @@ class GameService
         $session = $user->activeGameSession();
 
         if (! $session) {
-            throw new InvalidArgumentException('There is no active game session.');
+            throw new InvalidArgumentException('There is no active quiz session.');
         }
 
         $currentQuestion = $session->currentQuestion;
@@ -241,7 +241,7 @@ class GameService
         $session = $user->activeGameSession();
 
         if (! $session || $session->status !== 'in_progress') {
-            throw new InvalidArgumentException('There is no game in progress to pause.');
+            throw new InvalidArgumentException('There is no quiz in progress to pause.');
         }
 
         $session->status = 'paused';
@@ -253,7 +253,7 @@ class GameService
         $completed = $user->completedGameSession();
 
         if (! $completed) {
-            throw new InvalidArgumentException('You can only restart after completing the game.');
+            throw new InvalidArgumentException('You can only restart after completing the quiz.');
         }
 
         $this->deleteUserGameHistory($user);
@@ -406,7 +406,7 @@ class GameService
 
         return [
             'id' => $cluster->id,
-            'name' => $cluster->name,
+            'name' => preg_replace('/^Cluster\s+/i', 'Level ', $cluster->name),
             'description' => $cluster->description,
         ];
     }

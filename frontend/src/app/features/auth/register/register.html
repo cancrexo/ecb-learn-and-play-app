@@ -22,17 +22,13 @@
                 <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required minlength="6" />
             </label>
             <label class="auth__checkbox">
-                <input type="checkbox" [(ngModel)]="acceptTerms" name="acceptTerms" required />
-                I accept the <a routerLink="/terms">Terms &amp; Conditions</a>
-            </label>
-            <label class="auth__checkbox">
                 <input type="checkbox" [(ngModel)]="acceptDataProtection" name="acceptDataProtection" required />
                 I have read the <a [href]="dataProtectionNoticeUrl" target="_blank" rel="noopener noreferrer">Data Protection Notice</a>.
             </label>
             @if (error()) {
                 <p class="auth__error">{{ error() }}</p>
             }
-            <button type="submit" class="btn btn--primary" [disabled]="!acceptTerms || !acceptDataProtection">Register</button>
+            <button type="submit" class="btn btn--primary" [disabled]="!acceptDataProtection">Register</button>
         </form>
     </div>
     <p class="auth__link">Already have an account? <a routerLink="/login">Login</a></p>
