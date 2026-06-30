@@ -13,6 +13,14 @@ Route::post('/resend-verification-code', [AuthController::class, 'resendVerifica
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->middleware('throttle:5,1');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->middleware('throttle:5,1');
 
+Route::get('/version', function () {
+    $composer = json_decode(file_get_contents(base_path('composer.json')), true);
+
+    return response()->json([
+        'version' => $composer['version'] ?? '0.0.0',
+    ]);
+});
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);

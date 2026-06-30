@@ -38,7 +38,14 @@ export class AuthService {
         return localStorage.getItem(AUTH_TOKEN_KEY);
     }
 
-    register(data: { username: string; department_id: number; email: string; password: string; accept_terms: boolean }) {
+    register(data: {
+        username: string;
+        department_id: number;
+        email: string;
+        password: string;
+        accept_terms: boolean;
+        accept_data_protection: boolean;
+    }) {
         return this.http.post<RegisterResponse>(`${environment.apiUrl}/register`, data);
     }
 

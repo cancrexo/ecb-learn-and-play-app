@@ -1,0 +1,11 @@
+.splash__version {
+    position: fixed;
+    right: calc(16px + var(--safe-right));
+    bottom: calc(16px + var(--safe-bottom));
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-on-bg);
+    opacity: 0.85;
+    pointer-events: none;
+}

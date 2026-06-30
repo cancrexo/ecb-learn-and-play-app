@@ -1,4 +1,7 @@
 <div class="screen splash">
     <div class="splash__content"></div>
     <a routerLink="/splash-2" class="btn btn--primary">START</a>
+    @if (version()) {
+        <p class="splash__version">v{{ version() }}</p>
+    }
 </div>

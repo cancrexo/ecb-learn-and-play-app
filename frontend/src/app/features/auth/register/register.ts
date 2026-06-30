@@ -17,7 +17,11 @@ export class RegisterComponent {
     email = '';
     password = '';
     acceptTerms = false;
+    acceptDataProtection = false;
     error = signal('');
+
+    readonly dataProtectionNoticeUrl =
+        'https://www.ecb.europa.eu/ecb/access_to_documents/data_protection/shared/pdf/ecb.dpr.dgmip_digital_euro_internal_quiz.en.pdf?43e8ffc93ebfeeb530e9486f02abeb39';
 
     readonly departmentOptions: DropdownOption<number>[] = [
         { value: 1, label: 'Banknotes' },
@@ -65,6 +69,7 @@ export class RegisterComponent {
             email: this.email,
             password: this.password,
             accept_terms: this.acceptTerms,
+            accept_data_protection: this.acceptDataProtection,
         }).subscribe({
             next: () => {
                 this.router.navigate(['/verify-email'], {

@@ -26,6 +26,7 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:6',
             'accept_terms' => 'accepted',
+            'accept_data_protection' => 'accepted',
         ]);
 
         $this->assertEmailDomainAllowed($data['email']);
