@@ -219,6 +219,36 @@ a {
         app-dropdown {
             display: block;
         }
+
+        .auth__password-wrap {
+            position: relative;
+            display: block;
+
+            input[type='text'],
+            input[type='password'] {
+                width: 100%;
+                padding-right: 44px;
+            }
+        }
+
+        .auth__password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            border: none;
+            background: none;
+            color: #94a3b8;
+            cursor: pointer;
+
+            &:hover {
+                color: #64748b;
+            }
+        }
     }
 
     &__checkbox {
