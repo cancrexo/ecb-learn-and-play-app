@@ -4,10 +4,15 @@ namespace App\Exports;
 
 use Illuminate\Database\Eloquent\Builder;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class GameSessionsExport implements FromQuery, WithHeadings, WithMapping
+class GameSessionsExport implements FromQuery, ShouldAutoSize, WithEvents, WithHeadings, WithMapping
 {
     public function __construct(private Builder $query) {}
 
@@ -41,6 +46,38 @@ class GameSessionsExport implements FromQuery, WithHeadings, WithMapping
             $session->total_score,
             $session->started_at?->format('Y-m-d H:i:s'),
             $session->completed_at?->format('Y-m-d H:i:s'),
+        ];
+    }
+
+    /** @return array<class-string, callable> */
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                $sheet = $event->sheet->getDelegate();
+                $highestColumn = $sheet->getHighestColumn();
+                $headerRange = 'A1:'.$highestColumn.'1';
+
+                // Congelar fila de cabecera
+                $sheet->freezePane('A2');
+
+                $sheet->getStyle($headerRange)->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                        'color' => ['rgb' => 'FFFFFF'],
+                    ],
+                    'fill' => [
+                        'fillType' => Fill::FILL_SOLID,
+                        'startColor' => ['rgb' => '1C1C1C'],
+                    ],
+                    'alignment' => [
+                        'horizontal' => Alignment::HORIZONTAL_CENTER,
+                        'vertical' => Alignment::VERTICAL_CENTER,
+                    ],
+                ]);
+
+                $sheet->getRowDimension(1)->setRowHeight(22);
+            },
         ];
     }
 }

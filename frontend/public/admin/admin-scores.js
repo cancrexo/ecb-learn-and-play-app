@@ -3,14 +3,25 @@
 
     var API_BASE = '/backend/api/admin';
     var TOKEN_KEY = 'admin_scores_token';
+    var PAGE_SIZE_KEY = 'admin_scores_per_page';
+    var DEFAULT_PER_PAGE = 25;
+    var MIN_PER_PAGE = 10;
+    var MAX_PER_PAGE = 100;
+
+    function loadSavedPageSize() {
+        var saved = parseInt(localStorage.getItem(PAGE_SIZE_KEY), 10);
+        if (!isNaN(saved) && saved >= MIN_PER_PAGE && saved <= MAX_PER_PAGE) {
+            return saved;
+        }
+        return DEFAULT_PER_PAGE;
+    }
 
     var state = {
         page: 1,
-        perPage: 25,
+        perPage: loadSavedPageSize(),
         sort: 'completed_at',
         order: 'desc',
-        email: '',
-        username: '',
+        search: '',
     };
 
     var loginView = document.getElementById('login-view');
@@ -22,6 +33,17 @@
     var paginationInfo = document.getElementById('pagination-info');
     var paginationEl = document.getElementById('pagination');
     var filtersForm = document.getElementById('filters-form');
+    var pageSizeSelect = document.getElementById('page-size');
+
+    function syncPageSizeSelect() {
+        if (pageSizeSelect) {
+            pageSizeSelect.value = String(state.perPage);
+        }
+    }
+
+    function savePageSize(size) {
+        localStorage.setItem(PAGE_SIZE_KEY, String(size));
+    }
 
     function getToken() {
         return sessionStorage.getItem(TOKEN_KEY);
@@ -140,11 +162,8 @@
         params.set('per_page', String(state.perPage));
         params.set('sort', state.sort);
         params.set('order', state.order);
-        if (state.email) {
-            params.set('email', state.email);
-        }
-        if (state.username) {
-            params.set('username', state.username);
+        if (state.search) {
+            params.set('search', state.search);
         }
         if (extra) {
             Object.keys(extra).forEach(function (key) {
@@ -328,17 +347,14 @@
 
     filtersForm.addEventListener('submit', function (event) {
         event.preventDefault();
-        state.email = document.getElementById('filter-email').value.trim();
-        state.username = document.getElementById('filter-username').value.trim();
+        state.search = document.getElementById('filter-search').value.trim();
         state.page = 1;
         loadScores();
     });
 
     document.getElementById('clear-filters-btn').addEventListener('click', function () {
-        document.getElementById('filter-email').value = '';
-        document.getElementById('filter-username').value = '';
-        state.email = '';
-        state.username = '';
+        document.getElementById('filter-search').value = '';
+        state.search = '';
         state.page = 1;
         loadScores();
     });
@@ -372,6 +388,22 @@
         state.page = page;
         loadScores();
     });
+
+    syncPageSizeSelect();
+
+    if (pageSizeSelect) {
+        pageSizeSelect.addEventListener('change', function () {
+            var size = parseInt(pageSizeSelect.value, 10);
+            if (isNaN(size) || size < MIN_PER_PAGE || size > MAX_PER_PAGE) {
+                syncPageSizeSelect();
+                return;
+            }
+            state.perPage = size;
+            state.page = 1;
+            savePageSize(size);
+            loadScores();
+        });
+    }
 
     if (getToken()) {
         showPanel();

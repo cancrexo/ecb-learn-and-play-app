@@ -1,13 +1,75 @@
+:root {
+    --admin-brand: #4a69bd;
+    --admin-brand-hover: #3f5aa3;
+}
+
+.admin-panel-main {
+    width: 90%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.admin-navbar {
+    background-color: var(--admin-brand) !important;
+}
+
+.admin-navbar .navbar-brand {
+    color: #fff !important;
+}
+
+.admin-navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.admin-navbar-logo {
+    display: block;
+    height: 40px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.btn-admin {
+    background-color: var(--admin-brand);
+    border-color: var(--admin-brand);
+    color: #f1e7e7;
+}
+
+.btn-admin:hover,
+.btn-admin:focus,
+.btn-admin:active {
+    background-color: var(--admin-brand-hover);
+    border-color: var(--admin-brand-hover);
+    color: #fff;
+}
+
+thead.admin-thead th {
+    background-color: var(--admin-brand) !important;
+    color: #fff !important;
+    border: 1px solid #fff;
+}
+
 .sortable {
     cursor: pointer;
     user-select: none;
     white-space: nowrap;
 }
 
-/* Cabecera oscura: evitar fondo blanco al hover (table-hover / Bootstrap) */
-thead.table-dark th.sortable:hover,
-thead.table-dark th.sortable.active {
-    background-color: #373b3e !important;
+thead.admin-thead th.sortable:hover,
+thead.admin-thead th.sortable.active {
+    background-color: var(--admin-brand-hover) !important;
     color: #fff !important;
 }
 
@@ -24,6 +86,15 @@ thead.table-dark th.sortable.active {
 #login-view.d-block,
 #panel-view.d-block {
     display: block !important;
+}
+
+.page-size-control .form-select {
+    width: auto;
+    min-width: 4.5rem;
+}
+
+.admin-footer-actions {
+    justify-content: flex-end;
 }
 
 .password-toggle-icon {

@@ -43,27 +43,25 @@ class ScoreController extends Controller
         return Excel::download(new GameSessionsExport($query), $filename);
     }
 
-    /** @return array{email: ?string, username: ?string, sort: string, order: string, per_page: int} */
+    /** @return array{search: ?string, sort: string, order: string, per_page: int} */
     private function validatedListParams(Request $request): array
     {
         $data = $request->validate([
-            'email' => 'nullable|string|max:255',
-            'username' => 'nullable|string|max:64',
+            'search' => 'nullable|string|max:255',
             'sort' => 'nullable|in:email,username,total_score,completed_at',
             'order' => 'nullable|in:asc,desc',
             'per_page' => 'nullable|integer|min:10|max:100',
         ]);
 
         return [
-            'email' => isset($data['email']) && $data['email'] !== '' ? $data['email'] : null,
-            'username' => isset($data['username']) && $data['username'] !== '' ? $data['username'] : null,
+            'search' => isset($data['search']) && $data['search'] !== '' ? $data['search'] : null,
             'sort' => $data['sort'] ?? 'completed_at',
             'order' => $data['order'] ?? 'desc',
             'per_page' => (int) ($data['per_page'] ?? config('admin.default_per_page', 25)),
         ];
     }
 
-    /** @param array{email: ?string, username: ?string, sort: string, order: string, per_page: int} $params */
+    /** @param array{search: ?string, sort: string, order: string, per_page: int} $params */
     private function buildCompletedSessionsQuery(array $params): Builder
     {
         $query = GameSession::query()
@@ -72,12 +70,12 @@ class ScoreController extends Controller
             ->where('game_sessions.status', 'completed')
             ->with('user:id,username,email,department_id');
 
-        if ($params['email'] !== null) {
-            $query->where('users.email', 'like', '%'.$params['email'].'%');
-        }
-
-        if ($params['username'] !== null) {
-            $query->where('users.username', 'like', '%'.$params['username'].'%');
+        if ($params['search'] !== null) {
+            $term = $params['search'];
+            $query->where(function ($q) use ($term) {
+                $q->where('users.email', 'like', '%'.$term.'%')
+                    ->orWhere('users.username', 'like', '%'.$term.'%');
+            });
         }
 
         $sortMap = [
