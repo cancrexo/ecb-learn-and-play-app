@@ -16,6 +16,7 @@ export class RegisterComponent {
     departmentId: number | '' = '';
     email = '';
     password = '';
+    showPassword = false;
     acceptDataProtection = false;
     error = signal('');
 
