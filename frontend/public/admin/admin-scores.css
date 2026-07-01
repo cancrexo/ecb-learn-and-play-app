@@ -1,0 +1,32 @@
+.sortable {
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+
+/* Cabecera oscura: evitar fondo blanco al hover (table-hover / Bootstrap) */
+thead.table-dark th.sortable:hover,
+thead.table-dark th.sortable.active {
+    background-color: #373b3e !important;
+    color: #fff !important;
+}
+
+.sortable .sort-indicator {
+    opacity: 0.45;
+    font-size: 0.75rem;
+    margin-left: 0.25rem;
+}
+
+.sortable.active .sort-indicator {
+    opacity: 1;
+}
+
+#login-view.d-block,
+#panel-view.d-block {
+    display: block !important;
+}
+
+.password-toggle-icon {
+    display: inline-flex;
+    line-height: 0;
+}

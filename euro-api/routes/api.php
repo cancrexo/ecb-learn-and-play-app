@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Api\Admin\ScoreController as AdminScoreController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ClusterController;
 use App\Http\Controllers\Api\GameController;
@@ -19,6 +21,16 @@ Route::get('/version', function () {
     return response()->json([
         'version' => $composer['version'] ?? '0.0.0',
     ]);
+});
+
+Route::prefix('admin')->group(function () {
+    Route::post('/login', [AdminAuthController::class, 'login'])->middleware('throttle:5,1');
+
+    Route::middleware(['admin.auth', 'throttle:60,1'])->group(function () {
+        Route::post('/logout', [AdminAuthController::class, 'logout']);
+        Route::get('/scores', [AdminScoreController::class, 'index']);
+        Route::get('/scores/export', [AdminScoreController::class, 'export']);
+    });
 });
 
 Route::middleware('auth:sanctum')->group(function () {

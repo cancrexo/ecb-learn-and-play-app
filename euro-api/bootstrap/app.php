@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminAuthMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,7 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
         apiPrefix: 'api',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Auth por Bearer token (Sanctum), sin cookies/CSRF de SPA stateful
+        $middleware->alias([
+            'admin.auth' => AdminAuthMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
