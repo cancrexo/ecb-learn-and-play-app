@@ -7,10 +7,10 @@ $aspect_ratio_v: math.div(1801, 1920);
 $logoh_w: 2000px; $logoh_h: 1169px; // horizontal
 $aspect_ratio_h: math.div(2000, 1169);
 
-// Anchos logo en desktop
-$logo-desktop-splash1-w: 480px;
-$logo-desktop-horizontal-w: 680px;
-$logo-desktop-quiz-w: 520px;
+// Anchos logo en desktop (-20% respecto a valores originales)
+$logo-desktop-splash1-w: 384px;
+$logo-desktop-horizontal-w: 544px;
+$logo-desktop-quiz-w: 416px;
 
 .logo {
     position: fixed;
@@ -75,7 +75,8 @@ $logo-desktop-quiz-w: 520px;
         top: 32px;
         left: calc(50% + 5vw);
         transform: translateX(-50%);
-        height:90vh;
+        width: calc(72vw * 1.92);
+        height: 72vh;
     }
 
     :host-context(app-root:has(app-splash2)) .logo,
@@ -89,8 +90,8 @@ $logo-desktop-quiz-w: 520px;
         top: -5vh;
         left: calc(50% + 10vw);
         transform: translateX(-50%);
-        width: 70vw;
-        max-width: 720px;
+        width: 56vw;
+        max-width: 576px;
     }
 
     :host-context(app-root:has(app-terms)) .logo {
