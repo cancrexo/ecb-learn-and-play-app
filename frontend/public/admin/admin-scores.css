@@ -101,6 +101,14 @@ thead.admin-thead th.sortable.active {
     justify-content: flex-end;
 }
 
+.answers-summary {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.8125rem;
+    max-width: 380px;
+    white-space: normal;
+    word-break: break-word;
+}
+
 .password-toggle-icon {
     display: inline-flex;
     line-height: 0;

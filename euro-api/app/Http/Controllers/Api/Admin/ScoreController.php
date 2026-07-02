@@ -68,7 +68,13 @@ class ScoreController extends Controller
             ->select('game_sessions.*')
             ->join('users', 'users.id', '=', 'game_sessions.user_id')
             ->where('game_sessions.status', 'completed')
-            ->with('user:id,username,email,department_id');
+            ->with([
+                'user:id,username,email,department_id',
+                'answers' => function ($q) {
+                    $q->select('id', 'session_id', 'is_correct', 'answered_at')
+                        ->orderBy('answered_at');
+                },
+            ]);
 
         if ($params['search'] !== null) {
             $term = $params['search'];
@@ -106,6 +112,7 @@ class ScoreController extends Controller
             'email' => $session->user?->email,
             'department_id' => $session->user?->department_id,
             'total_score' => $session->total_score,
+            'answers_summary' => $session->answersSummary(),
             'started_at' => $session->started_at?->toIso8601String(),
             'completed_at' => $session->completed_at?->toIso8601String(),
         ];

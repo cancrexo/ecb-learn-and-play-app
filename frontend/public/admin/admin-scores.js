@@ -175,7 +175,7 @@
 
     function renderRows(data) {
         if (!data.length) {
-            scoresTbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted py-4">No sessions found.</td></tr>';
+            scoresTbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-4">No sessions found.</td></tr>';
             return;
         }
 
@@ -185,6 +185,7 @@
                 '<td>' + escapeHtml(row.username) + '</td>' +
                 '<td>' + escapeHtml(row.email) + '</td>' +
                 '<td class="text-end fw-semibold">' + escapeHtml(row.total_score) + '</td>' +
+                '<td class="answers-summary">' + escapeHtml(row.answers_summary || '—') + '</td>' +
                 '<td>' + escapeHtml(formatDate(row.completed_at)) + '</td>' +
                 '</tr>'
             );
@@ -228,7 +229,7 @@
 
     async function loadScores() {
         hidePanelError();
-        scoresTbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted py-4">Loading…</td></tr>';
+        scoresTbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-4">Loading…</td></tr>';
         updateSortIndicators();
 
         try {
@@ -250,7 +251,7 @@
         } catch (err) {
             if (err.message !== 'Unauthorized') {
                 showPanelError(err.message || 'Failed to load sessions.');
-                scoresTbody.innerHTML = '<tr><td colspan="4" class="text-center text-danger py-4">Error</td></tr>';
+                scoresTbody.innerHTML = '<tr><td colspan="5" class="text-center text-danger py-4">Error</td></tr>';
             }
         }
     }

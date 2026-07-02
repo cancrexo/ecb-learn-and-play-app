@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class GameSession extends Model
 {
+    public const TOTAL_QUESTIONS = 16;
+
     protected $fillable = [
         'user_id',
         'status',
@@ -44,5 +46,36 @@ class GameSession extends Model
     public function answers(): HasMany
     {
         return $this->hasMany(GameAnswer::class, 'session_id')->orderBy('answered_at');
+    }
+
+    /** Valores 1/0 por orden de respuesta (hasta TOTAL_QUESTIONS); null si no respondida. */
+    /** @return list<int|null> */
+    public function answerFlagsByOrder(): array
+    {
+        $flags = array_fill(0, self::TOTAL_QUESTIONS, null);
+
+        foreach ($this->answers as $index => $answer) {
+            if ($index >= self::TOTAL_QUESTIONS) {
+                break;
+            }
+            $flags[$index] = $answer->is_correct ? 1 : 0;
+        }
+
+        return $flags;
+    }
+
+    /** Resumen compacto para el listado admin: q1:1, q2:0, … */
+    public function answersSummary(): string
+    {
+        $parts = [];
+
+        foreach ($this->answers as $index => $answer) {
+            if ($index >= self::TOTAL_QUESTIONS) {
+                break;
+            }
+            $parts[] = 'q'.($index + 1).':'.($answer->is_correct ? '1' : '0');
+        }
+
+        return implode(', ', $parts);
     }
 }

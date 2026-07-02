@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\GameSession;
 use Illuminate\Database\Eloquent\Builder;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -24,29 +25,42 @@ class GameSessionsExport implements FromQuery, ShouldAutoSize, WithEvents, WithH
     /** @return list<string> */
     public function headings(): array
     {
-        return [
+        $questionHeadings = [];
+        for ($i = 1; $i <= GameSession::TOTAL_QUESTIONS; $i++) {
+            $questionHeadings[] = 'Q'.$i;
+        }
+
+        return array_merge([
             'Session ID',
             'Player',
             'Email',
             'Department',
             'Score',
+        ], $questionHeadings, [
             'Started at',
             'Completed at',
-        ];
+        ]);
     }
 
     /** @return list<mixed> */
     public function map($session): array
     {
-        return [
+        $flags = $session->answerFlagsByOrder();
+        $questionValues = array_map(
+            fn (?int $flag) => $flag === null ? '-' : $flag,
+            $flags
+        );
+
+        return array_merge([
             $session->id,
             $session->user?->username,
             $session->user?->email,
             $session->user?->department_id,
             $session->total_score,
+        ], $questionValues, [
             $session->started_at?->format('Y-m-d H:i:s'),
             $session->completed_at?->format('Y-m-d H:i:s'),
-        ];
+        ]);
     }
 
     /** @return array<class-string, callable> */
